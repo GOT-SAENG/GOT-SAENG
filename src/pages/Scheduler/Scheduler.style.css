@@ -1,0 +1,73 @@
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+/* 공통 카드 스타일 */
+.day-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  height: 80px;
+  padding: 6px;
+  position: relative;
+  background: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* 모든 날짜 숫자 기본 스타일 (정렬 안정) */
+.day-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  transition: 0.15s ease-in-out;
+}
+
+.next-month-label {
+  font-size: 14px;
+  font-weight: 600;
+  position: absolute;
+  color: #bbb;
+  top: 6px;
+  right: 8px;
+  /* width/height 없으므로 줄바꿈 안 생김 */
+}
+
+/* 현재 달 */
+.day-box.current .day-number {
+  color: #000;
+}
+
+/* 이전/다음 달 */
+.day-box.prev .day-number,
+.day-box.next .day-number {
+  color: #bbb;
+}
+
+/* 오늘 날짜만 강조 스타일 */
+.day-box.today .day-number {
+  background-color: red;
+  color: #fff !important;
+}
+
+/* 주말 색 (요일 기준) */
+.week-header .week-day:nth-child(1),
+.calendar-grid .day-box:nth-child(7n + 1) .day-number {
+  color: red;
+}
+
+.week-header .week-day:nth-child(7),
+.calendar-grid .day-box:nth-child(7n) .day-number {
+  color: blue;
+}
