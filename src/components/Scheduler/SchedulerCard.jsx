@@ -1,5 +1,5 @@
 import React from "react";
-import "../Scheduler.style.css";
+import "./SchedulerCard.style.css";
 
 const SchedulerCard = ({ day, type, year, month }) => {
   const today = new Date();
