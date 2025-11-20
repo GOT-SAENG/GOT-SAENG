@@ -1,0 +1,59 @@
+
+/* 공통 카드 스타일 */
+.day-box {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 6px;
+  position: relative;
+  background: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* 모든 날짜 숫자 기본 스타일 (정렬 안정) */
+.day-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 14px;
+  /* font-weight: 600; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  transition: 0.15s ease-in-out;
+}
+
+.next-month-label {
+  font-size: 14px;
+  /* font-weight: 600; */
+  position: absolute;
+  color: #134A2F;
+  top: 6px;
+  right: 8px;
+}
+
+/* 현재 달 */
+.day-box.current .day-number {
+  color: #000;
+}
+
+/* 이전/다음 달 */
+.day-box.prev .day-number,
+.day-box.next .day-number {
+  color: #134A2F;
+}
+
+/* 오늘 날짜만 강조 스타일 */
+.day-box.today .day-number {
+  background-color: red;
+  color: #fff !important;
+}
+
+.day-box:nth-child(7n + 1),
+.day-box:nth-child(7n) {
+  background-color: #527E66; /* 부드러운 빨간 계열 */
+}
