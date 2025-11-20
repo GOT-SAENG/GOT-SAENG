@@ -1,8 +1,8 @@
 import { useState } from "react";
-import TodoHeader from "./ui/TodoHeader";
-import TodoList from "./ui/TodoList";
-import AIPriority from "./ui/AIPriority";
-import TodoModal from "./components/TodoModal";
+import TodoHeader from "../../components/Todo/TodoHeader";
+import TodoList from "../../components/Todo/TodoList";
+import AIPriority from "../../components/Todo/AIPriority";
+import TodoModal from "../../components/Todo/TodoModal";
 import "./Todo.style.css";
 
 function Todo() {
