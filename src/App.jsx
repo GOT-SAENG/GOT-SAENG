@@ -1,8 +1,12 @@
 import "./App.css";
-import Scheduler from "./pages/Scheduler/Scheduler";
+import Home from "./pages/Home/Home";
 
 function App() {
-  return <Scheduler />;
+  return (
+    <>
+      <Home />
+    </>
+  );
 }
 
 export default App;
