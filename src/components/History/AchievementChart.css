@@ -1,0 +1,80 @@
+.achievement-chart {
+  padding: 2rem 0;
+}
+
+.chart-box {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.chart-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.chart-comment {
+  font-size: 0.9rem;
+  color: #666;
+  background: #f8f9fa;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #e9ecef;
+}
+
+.period-tabs {
+  margin-bottom: 1.5rem;
+  border-bottom: none;
+}
+
+.period-tabs .nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.period-tabs.nav.nav-tabs .nav-link {
+  color: #6c757d;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+}
+
+.period-tabs.nav.nav-tabs .nav-link:hover {
+  color: #495057;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+}
+
+.period-tabs.nav.nav-tabs .nav-link.active {
+  color: #000;
+  border: none;
+  background: none;
+  border-bottom: 2px solid #000;
+  font-weight: 500;
+}
+
+div.period-tabs .nav-link {
+  color: #6c757d;
+}
+
+div.period-tabs .nav-link.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+  font-weight: 500;
+}
+
+.chart-container {
+  padding: 1rem 0;
+}

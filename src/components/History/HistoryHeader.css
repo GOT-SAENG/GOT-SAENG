@@ -1,0 +1,60 @@
+.history-header {
+    padding: 1.5rem 0;
+    background-color: #1A6B44;
+    border-bottom: none;
+  }
+
+  .header-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+
+  .user-profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .user-name {
+    font-weight: 500;
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #fff;
+  }
+
+  .user-profile-dropdown {
+    padding: 0;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .user-profile-dropdown:hover {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .user-profile-dropdown:focus {
+    color: #fff;
+    box-shadow: none;
+  }
+
+  .user-profile-dropdown::after {
+    display: none !important;
+  }
+
+  .user-profile {
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .user-name {
+    color: #fff;
+  }
