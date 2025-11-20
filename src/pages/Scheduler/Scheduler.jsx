@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Scheduler.style.css";
 import { Container } from "react-bootstrap";
-import SchedulerCard from "./components/SchedulerCard";
+import SchedulerCard from "../../components/Scheduler/SchedulerCard";
 
 const Scheduler = () => {
   const [date, setDate] = useState(new Date());
