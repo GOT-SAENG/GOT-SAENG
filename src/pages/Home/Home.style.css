@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+}
+
+/* .home-container {
+  max-width: 1500px;
+  margin: 0 auto;
+} */
+
+.home-header {
+  background-color: #134a2f;
+  color: white;
+}
+
+.main-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-size: 3rem;
+}
+
+.sub-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-size: 24px;
+}
+
+.home-middle {
+  background-color: #1a6b44;
+  color: white;
+}
+
+.middle-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-size: 24px;
+}
+
+.middle-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 570px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.middle-box .card {
+  border-radius: 12px;
+  padding: 30px;
+  color: white;
+  background-color: #527e66;
+  text-align: center;
+}
+
+.home-bottom {
+  background-color: #134a2f;
+  color: white;
+}
+
+.bottom-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-size: 24px;
+}
+
+.bottom-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 570px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.bottom-box .card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  background-color: #527e66;
+  border-radius: 12px;
+  padding: 30px;
+  color: white;
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #3b8fe3;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  /* text-align: center; */
+}
+
+.card-description {
+  font-size: 16px;
+  opacity: 0.9;
+  font-weight: lighter;
+  line-height: 0;
+  /* text-align: center; */
+}
+
+@media (max-width: 768px) {
+  .middle-box {
+    grid-template-columns: 1fr; /* 모바일에서는 1열 */
+  }
+}
