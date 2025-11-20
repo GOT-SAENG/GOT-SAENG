@@ -2,10 +2,12 @@ import { useState } from "react";
 import TodoHeader from "./ui/TodoHeader";
 import TodoList from "./ui/TodoList";
 import AIPriority from "./ui/AIPriority";
+import TodoModal from "./components/TodoModal";
 import "./Todo.style.css";
 
 function Todo() {
   const [showAIPriority, setShowAIPriority] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [todos] = useState([
     {
       id: 1,
@@ -34,14 +36,32 @@ function Todo() {
     },
   ]);
 
+  // 우선순위 보여주기
   const handleAIRecommend = () => {
     setShowAIPriority(!showAIPriority);
+  };
+
+  // ToDo 등록하기(모달열기)
+  const handleAddTodo = () => {
+    setIsModalOpen(true);
+  };
+
+  //  Todo 모달 닫기
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // Todo 등록(저장)하기
+  const handleSaveTodo = (todoData) => {
+    // TODO: 실제 저장 로직 구현
+    console.log("Todo 저장:", todoData);
+    handleCloseModal();
   };
 
   return (
     <div className="todo-page">
       <div className="todo-content">
-        <TodoHeader />
+        <TodoHeader onAddTodo={handleAddTodo} />
         <TodoList todos={todos} />
         {showAIPriority && <AIPriority todos={todos} />}
       </div>
@@ -51,6 +71,13 @@ function Todo() {
         <span>✨</span>
         AI 추천 받기
       </button>
+
+      {/* Todo 모달 */}
+      <TodoModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSaveTodo}
+      />
     </div>
   );
 }
