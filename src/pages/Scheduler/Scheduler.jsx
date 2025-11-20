@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import "./Scheduler.style.css";
 import { Container } from "react-bootstrap";
