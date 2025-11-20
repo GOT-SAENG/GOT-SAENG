@@ -1,0 +1,129 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #ffffff;
+  padding: 20px 24px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.todo-item:hover {
+  background: #fafafa;
+  border-color: #134a2f;
+}
+
+.todo-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 텍스트 영역 */
+.todo-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-date {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #666666;
+  margin-bottom: 6px;
+  /* letter-spacing: -0.01em; */
+}
+
+.todo-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+/* 오른쪽(수정,삭제) 버튼들 */
+.todo-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.todo-edit-btn {
+  background: #f5f5f5 !important;
+  border: 1px solid #e0e0e0 !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: #333333 !important;
+  /* transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; */
+  min-width: 70px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.todo-edit-btn:hover {
+  background: #134a2f !important;
+  border-color: #134a2f !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(19, 74, 47, 0.2);
+}
+
+.todo-edit-btn:active {
+  transform: translateY(1px);
+}
+
+.todo-delete-btn {
+  background: #ffffff !important;
+  border: 1px solid #e0e0e0 !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: #ef4444 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  min-width: 70px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.todo-delete-btn:hover {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.todo-delete-btn:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 768px) {
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .todo-actions {
+    flex-direction: row;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .todo-edit-btn,
+  .todo-delete-btn {
+    flex: 1;
+    min-width: auto;
+  }
+
+  .todo-title {
+    font-size: 1rem;
+  }
+
+  .todo-date {
+    font-size: 0.813rem;
+  }
+}

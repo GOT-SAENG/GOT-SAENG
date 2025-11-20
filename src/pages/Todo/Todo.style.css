@@ -1,0 +1,63 @@
+.todo-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.todo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ai-recommend-button {
+  width: 100%;
+  max-width: 320px;
+  margin: 32px auto 0;
+  padding: 16px 40px;
+  background: white;
+  color: #134a2f;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.ai-recommend-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+}
+
+.ai-recommend-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .todo-page {
+    padding: 40px 16px;
+  }
+
+  .todo-content {
+    gap: 20px;
+  }
+
+  .ai-recommend-button {
+    max-width: 100%;
+    padding: 14px 32px;
+    margin-top: 24px;
+    font-size: 1rem;
+  }
+}
+
