@@ -1,15 +1,48 @@
+.year-month-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 0 30px;
+}
+
+/* 가운데 div만 flex-grow 적용 */
+.year-month-box > div:nth-child(2) {
+  flex: 1;
+  text-align: center;
+}
+
+.week-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 6px;
+  gap: 6px;
+}
+
+.week-day {
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  /* padding: 6px; */
+  font-weight: 600;
+}
+
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   gap: 6px;
   text-align: center;
+  height: calc(100vh - 100px);
 }
 
 /* 공통 카드 스타일 */
 .day-box {
   border: 1px solid #ddd;
-  border-radius: 10px;
-  height: 80px;
+  border-radius: 15px;
   padding: 6px;
   position: relative;
   background: #fff;
@@ -24,7 +57,7 @@
   height: 26px;
   border-radius: 50%;
   font-size: 14px;
-  font-weight: 600;
+  /* font-weight: 600; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,12 +69,11 @@
 
 .next-month-label {
   font-size: 14px;
-  font-weight: 600;
+  /* font-weight: 600; */
   position: absolute;
-  color: #bbb;
+  color: #134A2F;
   top: 6px;
   right: 8px;
-  /* width/height 없으므로 줄바꿈 안 생김 */
 }
 
 /* 현재 달 */
@@ -52,7 +84,7 @@
 /* 이전/다음 달 */
 .day-box.prev .day-number,
 .day-box.next .day-number {
-  color: #bbb;
+  color: #134A2F;
 }
 
 /* 오늘 날짜만 강조 스타일 */
@@ -62,7 +94,7 @@
 }
 
 /* 주말 색 (요일 기준) */
-.week-header .week-day:nth-child(1),
+/* .week-header .week-day:nth-child(1),
 .calendar-grid .day-box:nth-child(7n + 1) .day-number {
   color: red;
 }
@@ -70,4 +102,10 @@
 .week-header .week-day:nth-child(7),
 .calendar-grid .day-box:nth-child(7n) .day-number {
   color: blue;
+} */
+
+.calendar-grid .day-box:nth-child(7n + 1),
+.calendar-grid .day-box:nth-child(7n) {
+  background-color: #527E66; /* 부드러운 빨간 계열 */
 }
+

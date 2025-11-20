@@ -50,13 +50,17 @@ const Scheduler = () => {
       <Container>
         {/* 년,월 박스 */}
         <div className="year-month-box">
-          <button onClick={minusMonth}>◀</button>
-          {year}년 {month}월<button onClick={plusMonth}>▶</button>
+          <div>아이콘</div>
+          <div>
+            <button onClick={minusMonth}>◀</button>
+            {year}년 {month}월
+            <button onClick={plusMonth}>▶</button>
+          </div>
           <button onClick={goToToday}>오늘</button>
         </div>
 
         {/* 요일 헤더 */}
-        <div className="calendar-grid week-header">
+        <div className="week-header">
           {weekDays.map((day) => (
             <div key={day} className="week-day">
               {day}
