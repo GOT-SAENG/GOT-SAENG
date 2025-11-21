@@ -1,3 +1,9 @@
+.todo-container {
+  /* background-color: #eaf5ec; 이 색상 배경색으로 추천해보기 */
+  background-color: #134a2f;
+  min-height: 100vh;
+}
+
 .todo-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -24,8 +30,6 @@
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,4 +64,3 @@
     font-size: 1rem;
   }
 }
-
