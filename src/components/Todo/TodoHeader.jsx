@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import "./TodoHeader.style.css";
 
-function TodoHeader({ onAddTodo }) {
+const TodoHeader = ({ onAddTodo }) => {
   return (
     <div className="todo-header">
       <div className="month-nav">
@@ -19,6 +19,6 @@ function TodoHeader({ onAddTodo }) {
       </Button>
     </div>
   );
-}
+};
 
 export default TodoHeader;

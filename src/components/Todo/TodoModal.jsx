@@ -9,12 +9,30 @@ const INITIAL_FORM = {
   dateType: "single",
   startDate: "",
   dueDate: null,
-  estimatedTime: "",
-  alarmTime: "", // alarmTime만 사용 (값이 있으면 알람 켜짐, 없으면 꺼짐)
+  startTime: "",
+  endTime: "",
+  isAlarm: false, // isAlarm만 사용
 };
 
-function TodoModal({ isOpen, onClose, onSave }) {
-  const [formData, setFormData] = useState(INITIAL_FORM);
+const TodoModal = ({ isOpen, onClose, onSave, editTodo = null }) => {
+  const getInitialFormData = () => {
+    if (editTodo) {
+      return {
+        title: editTodo.title || "",
+        description: editTodo.description || "",
+        priority: String(editTodo.importance || "2"),
+        dateType: editTodo.dateType || "single",
+        startDate: editTodo.startDate || "",
+        dueDate: editTodo.dueDate || null,
+        startTime: editTodo.startTime || "",
+        endTime: editTodo.endTime || "",
+        isAlarm: editTodo.isAlarm || false,
+      };
+    }
+    return INITIAL_FORM;
+  };
+
+  const [formData, setFormData] = useState(getInitialFormData);
 
   if (!isOpen) return null;
 
@@ -42,7 +60,7 @@ function TodoModal({ isOpen, onClose, onSave }) {
     onClose();
   };
 
-  // 🔹 공통 change handler
+  // 공통 change handler
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -62,17 +80,15 @@ function TodoModal({ isOpen, onClose, onSave }) {
     }));
   };
 
-  // 🔹 알람 On/Off (alarmTime으로 처리)
+  // 알람 On/Off (isAlarm으로 처리)
   const handleToggleAlarm = () => {
     setFormData((prev) => ({
       ...prev,
-      // alarmTime이 있으면 빈 문자열로 (알람 끄기)
-      // alarmTime이 없으면 기본값 "08:50"으로 (알람 켜기 - 시작일 09:00의 10분 전)
-      alarmTime: prev.alarmTime ? "" : "08:50",
+      isAlarm: !prev.isAlarm,
     }));
   };
 
-  // 🔹 취소 버튼
+  // 취소 버튼
   const handleCancel = () => {
     resetForm();
     onClose();
@@ -85,7 +101,7 @@ function TodoModal({ isOpen, onClose, onSave }) {
           ✕
         </button>
 
-        <h2 className="modal-title">TODO 등록</h2>
+        <h2 className="modal-title">{editTodo ? "TODO 수정" : "TODO 등록"}</h2>
 
         <form onSubmit={handleSubmit} className="modal-form">
           {/* 제목 */}
@@ -166,7 +182,9 @@ function TodoModal({ isOpen, onClose, onSave }) {
             <div className="form-group">
               <div className="form-date-range">
                 <div className="form-date-item">
-                  <label className="form-date-label">시작일</label>
+                  <label className="form-date-label">
+                    시작일<span className="required">*</span>
+                  </label>
                   <input
                     type="date"
                     name="startDate"
@@ -177,7 +195,9 @@ function TodoModal({ isOpen, onClose, onSave }) {
                   />
                 </div>
                 <div className="form-date-item">
-                  <label className="form-date-label">마감일</label>
+                  <label className="form-date-label">
+                    마감일<span className="required">*</span>
+                  </label>
                   <input
                     type="date"
                     name="dueDate"
@@ -193,7 +213,7 @@ function TodoModal({ isOpen, onClose, onSave }) {
           )}
 
           {/* 예상 시간 */}
-          <div className="form-group">
+          {/* <div className="form-group">
             <label className="form-label">예상소요시간</label>
             <select
               name="estimatedTime"
@@ -213,6 +233,32 @@ function TodoModal({ isOpen, onClose, onSave }) {
               <option value="300">5시간</option>
               <option value="480">8시간</option>
             </select>
+          </div> */}
+          {/* 시작시간 / 마감시간 */}
+          <div className="form-group">
+            <div className="form-date-range">
+              <div className="form-date-item">
+                <label className="form-date-label">시작시간</label>
+                <input
+                  type="time"
+                  name="startTime"
+                  value={formData.startTime}
+                  onChange={handleChange}
+                  className="form-input"
+                />
+              </div>
+              <div className="form-date-item">
+                <label className="form-date-label">마감시간</label>
+                <input
+                  type="time"
+                  name="endTime"
+                  value={formData.endTime}
+                  onChange={handleChange}
+                  className="form-input"
+                  min={formData.startTime}
+                />
+              </div>
+            </div>
           </div>
 
           {/* 알람 */}
@@ -222,26 +268,15 @@ function TodoModal({ isOpen, onClose, onSave }) {
               <label className="toggle-switch">
                 <input
                   type="checkbox"
-                  checked={!!formData.alarmTime}
+                  checked={formData.isAlarm}
                   onChange={handleToggleAlarm}
                 />
                 <span className="toggle-slider"></span>
               </label>
               <span className="toggle-label">
-                {formData.alarmTime ? "켜짐" : "꺼짐"}
+                {formData.isAlarm ? "켜짐" : "꺼짐"}
               </span>
             </div>
-
-            {formData.alarmTime && (
-              <input
-                type="time"
-                name="alarmTime"
-                value={formData.alarmTime}
-                onChange={handleChange}
-                className="form-input"
-                style={{ marginTop: "12px" }}
-              />
-            )}
           </div>
 
           {/* 버튼 */}
@@ -254,13 +289,13 @@ function TodoModal({ isOpen, onClose, onSave }) {
               취소
             </button>
             <button type="submit" className="modal-submit-btn">
-              등록하기
+              {editTodo ? "수정하기" : "등록하기"}
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default TodoModal;
