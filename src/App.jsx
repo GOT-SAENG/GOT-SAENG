@@ -8,7 +8,7 @@ import Login from "./components/Home/Login";
 import { AuthProvider } from "./context/AuthContext";
 import Register from "./components/Home/Register";
 import NotFound from "./pages/NotFound/NotFound";
-
+import Mypage from "./components/Home/Mypage";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/mypage" element={<Mypage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/history" element={<History />} />
           <Route path="/scheduler" element={<Scheduler />} />
