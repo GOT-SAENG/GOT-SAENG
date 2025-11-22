@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import TodoHeader from "../../components/Todo/TodoHeader";
 import TodoList from "../../components/Todo/TodoList";
 import AIPriority from "../../components/Todo/AIPriority";
@@ -16,7 +16,53 @@ import {
   useDeleteTodoMutation,
 } from "../../hooks/useTodos";
 import { useQueryClient } from "@tanstack/react-query";
-import { Alert } from "react-bootstrap";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
+import ErrorMessage from "../../components/common/ErrorMessage";
+
+const getErrorMessage = (error) => {
+  if (!error) return "알 수 없는 오류가 발생했습니다.";
+
+  const message = error.message || "";
+
+  if (message.includes("fetch") || message.includes("Failed to fetch")) {
+    return "인터넷 연결을 확인해주세요.";
+  }
+  if (message.includes("timeout")) {
+    return "요청 시간이 초과되었습니다. 잠시 후 다시 시도해주세요.";
+  }
+  if (message.includes("Network")) {
+    return "네트워크 연결이 불안정합니다.";
+  }
+
+  return "서버와 연결할 수 없습니다. 잠시 후 다시 시도해주세요.";
+};
+
+// 투두를 월별로 필터링하는 함수
+const getTodosByMonth = (todos, year, month) => {
+  return todos.filter((todo) => {
+    if (!todo.startDate) return false;
+
+    const startDate = new Date(todo.startDate);
+    const startYear = startDate.getFullYear();
+    const startMonth = startDate.getMonth();
+
+    if (todo.dateType === "range" && todo.dueDate) {
+      const dueDate = new Date(todo.dueDate);
+      const dueYear = dueDate.getFullYear();
+      const dueMonth = dueDate.getMonth();
+
+      const isStartInMonth = startYear === year && startMonth === month;
+      const isDueInMonth = dueYear === year && dueMonth === month;
+
+      const targetDate = new Date(year, month, 1);
+      const isMonthInRange = startDate <= targetDate && targetDate <= dueDate;
+
+      return isStartInMonth || isDueInMonth || isMonthInRange;
+    } else {
+      return startYear === year && startMonth === month;
+    }
+  });
+};
 
 const Todo = () => {
   const [showAIPriority, setShowAIPriority] = useState(false);
@@ -24,19 +70,59 @@ const Todo = () => {
   const [editTodo, setEditTodo] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState(null);
+  const [date, setDate] = useState(new Date());
   // const [todos] = useState();
-  const { data: todos, isLoading, isError, error } = useTodosQuery();
+  const {
+    data: todos,
+    isLoading,
+    isError,
+    error,
+    refetch: refetchTodos,
+  } = useTodosQuery();
   const addTodoMutation = useAddTodoMutation(); // 등록하기(POSY)
   const updateTodoMutation = useUpdateTodoMutation(); // 수정하기(PUT)
   const deleteTodoMutation = useDeleteTodoMutation(); // 삭제하기 (DELETE)
   const queryClient = useQueryClient(); // 자동목록갱신
 
+  // 월별 이동 함수들
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  const minusMonth = () =>
+    setDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+  const plusMonth = () =>
+    setDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+  const goToToday = () => setDate(new Date());
+
+  // 선택한 월의 투두만 필터링
+  const filteredTodos = useMemo(() => {
+    if (!todos || todos.length === 0) return [];
+    return getTodosByMonth(todos, year, month);
+  }, [todos, year, month]);
+
   console.log("데이터:", todos, isLoading, isError);
-  if (isLoading) return <div>로딩중...</div>;
-  if (isError) {
-    return <Alert variant="danger">{error.message}</Alert>;
+  if (isLoading) {
+    return (
+      <div className="todo-container">
+        <Header />
+        <LoadingSpinner size="large" message="Todo 불러오는 중..." />
+      </div>
+    );
   }
 
+  if (isError) {
+    return (
+      <div className="todo-container">
+        <Header />
+        <ErrorMessage
+          title="Todo를 불러올 수 없습니다"
+          message={getErrorMessage(error)}
+          onRetry={refetchTodos}
+          showHomeButton={true}
+        />
+      </div>
+    );
+  }
   // 우선순위 보여주기
   const handleAIRecommend = () => {
     setShowAIPriority(!showAIPriority);
@@ -161,14 +247,21 @@ const Todo = () => {
       <Header />
       <div className="todo-page">
         <div className="todo-content">
-          <TodoHeader onAddTodo={handleAddTodo} />
+          <TodoHeader
+            onAddTodo={handleAddTodo}
+            year={year}
+            month={month}
+            onMinusMonth={minusMonth}
+            onPlusMonth={plusMonth}
+            onGoToToday={goToToday}
+          />
           {/* 서버에서 todos 받아오기 */}
           <TodoList
-            todos={todos}
+            todos={filteredTodos}
             onEdit={handleEditTodo} // 수정하기
             onDelete={handleDeleteTodo} // 삭제하기
           />
-          {showAIPriority && <AIPriority todos={todos || []} />}
+          {showAIPriority && <AIPriority todos={filteredTodos || []} />}
         </div>
 
         {/* AI추천받기버튼 */}
@@ -191,10 +284,10 @@ const Todo = () => {
           isOpen={isDeleteModalOpen}
           onClose={handleCloseDeleteModal}
           onConfirm={handleConfirmDelete}
-          title="할 일 삭제"
+          title="TODO 삭제"
           message={
             todoToDelete
-              ? `"${todoToDelete.title}" 할 일을 삭제하시겠습니까?`
+              ? `"${todoToDelete.title}" Todo 삭제하시겠습니까?`
               : "정말 삭제하시겠습니까?"
           }
           confirmText="삭제"

@@ -1,5 +1,3 @@
-// src/utils/api.js
-
 export const getTodoPriorityByAI = async (todos) => {
   const MY_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 

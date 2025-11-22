@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { getTodoPriorityByAI } from "../../utils/api";
 import "./AIPriority.style.css";
 
+// 투두를 월별로 필터링하는 함수
 const getTodosByMonth = (todos, year, month) => {
   return todos.filter((todo) => {
     if (!todo.startDate) return false;
