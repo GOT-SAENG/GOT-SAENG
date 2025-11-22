@@ -3,7 +3,9 @@ import TodoHeader from "../../components/Todo/TodoHeader";
 import TodoList from "../../components/Todo/TodoList";
 import AIPriority from "../../components/Todo/AIPriority";
 import TodoModal from "../../components/Todo/TodoModal";
+import Modal from "../../components/common/Modal";
 import "./Todo.style.css";
+import Header from "../../components/common/Header";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +22,8 @@ const Todo = () => {
   const [showAIPriority, setShowAIPriority] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editTodo, setEditTodo] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [todoToDelete, setTodoToDelete] = useState(null);
   // const [todos] = useState();
   const { data: todos, isLoading, isError, error } = useTodosQuery();
   const addTodoMutation = useAddTodoMutation(); // 등록하기(POSY)
@@ -49,24 +53,36 @@ const Todo = () => {
     setIsModalOpen(true);
   };
 
-  // Todo 삭제하기
-  const handleDeleteTodo = async (todo) => {
-    console.log("삭제요청 ID:", todo.id);
-    const confirmed = window.confirm(
-      `"${todo.title}" 할 일을 삭제하시겠습니까?`
-    );
+  // Todo 삭제하기 (모달 열기)
+  const handleDeleteTodo = (todo) => {
+    setTodoToDelete(todo);
+    setIsDeleteModalOpen(true);
+  };
 
-    if (confirmed) {
-      try {
-        await deleteTodoMutation.mutateAsync(todo.id);
+  // Todo 삭제 확인
+  const handleConfirmDelete = async () => {
+    if (!todoToDelete) return;
 
-        // 목록 자동 새로고침
-        queryClient.invalidateQueries({ queryKey: ["todos"] });
-      } catch (err) {
-        console.error(err);
-        alert("삭제 실패했습니다.");
-      }
+    try {
+      await deleteTodoMutation.mutateAsync(todoToDelete.id);
+
+      // 목록 자동 새로고침
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+
+      setIsDeleteModalOpen(false);
+      setTodoToDelete(null);
+    } catch (err) {
+      console.error(err);
+      alert("삭제 실패했습니다.");
+      setIsDeleteModalOpen(false);
+      setTodoToDelete(null);
     }
+  };
+
+  // 삭제 모달 닫기
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setTodoToDelete(null);
   };
 
   // Todo 모달 닫기
@@ -142,6 +158,7 @@ const Todo = () => {
 
   return (
     <div className="todo-container">
+      <Header />
       <div className="todo-page">
         <div className="todo-content">
           <TodoHeader onAddTodo={handleAddTodo} />
@@ -167,6 +184,21 @@ const Todo = () => {
           onClose={handleCloseModal}
           onSave={handleSaveTodo}
           editTodo={editTodo}
+        />
+
+        {/* 삭제 확인 모달 */}
+        <Modal
+          isOpen={isDeleteModalOpen}
+          onClose={handleCloseDeleteModal}
+          onConfirm={handleConfirmDelete}
+          title="할 일 삭제"
+          message={
+            todoToDelete
+              ? `"${todoToDelete.title}" 할 일을 삭제하시겠습니까?`
+              : "정말 삭제하시겠습니까?"
+          }
+          confirmText="삭제"
+          confirmButtonStyle="danger"
         />
       </div>
     </div>
