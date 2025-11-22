@@ -34,7 +34,7 @@ const AchievementChart = ({ chartData }) => {
           <div className="chart-header">
             <h3 className="chart-title">달성 차트</h3>
             <div className="chart-comment">
-              💬 내가 얼마나 목표대로 열심히 했게?
+              💬 내가 얼마나 목표대로 열심히 했을까?
             </div>
           </div>
 
@@ -66,7 +66,7 @@ const AchievementChart = ({ chartData }) => {
                       border: "1px solid #dee2e6",
                       borderRadius: "8px",
                     }}
-                    formatter={(value) => `${value}%`}
+                    formatter={(value) => [`${value}%`, "달성률"]}
                     labelStyle={{ fontWeight: "600", marginBottom: "4px" }}
                   />
                   <Bar

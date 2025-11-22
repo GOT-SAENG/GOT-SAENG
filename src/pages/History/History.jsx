@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useHistory } from "../../hooks/History/useHistory";
 import Header from "../../components/common/Header";
 import AchievementChart from "../../components/History/AchievementChart";
@@ -38,20 +38,25 @@ const History = () => {
   const chartData = useMemo(() => {
     if (!historyData || historyData.length === 0) return null;
 
-    // 월간 달성률 계산
-    const monthlyData = historyData.map((monthItem) => {
-      const totalItems = monthItem.items.length;
-      const completedItems = monthItem.items.filter(
-        (item) => item.completed
-      ).length;
-      const percentage =
-        totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
+    // 현재 연도
+    const currentYear = new Date().getFullYear();
 
-      return {
-        name: `${monthItem.month}월`,
-        value: percentage,
-      };
-    });
+    // 월간 달성률 계산 (현재 연도만)
+    const monthlyData = historyData
+      .filter((monthItem) => monthItem.year === currentYear)
+      .map((monthItem) => {
+        const totalItems = monthItem.items.length;
+        const completedItems = monthItem.items.filter(
+          (item) => item.completed
+        ).length;
+        const percentage =
+          totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
+
+        return {
+          name: `${monthItem.month}월`,
+          value: percentage,
+        };
+      });
 
     // 연간 달성률 계산 (연도별로 그룹화)
     const yearlyStats = {};
