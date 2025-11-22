@@ -9,59 +9,23 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import LoadingSpinner from "../common/LoadingSpinner";
 import "./AchievementChart.css";
 
-const AchievementChart = () => {
+const AchievementChart = ({ chartData }) => {
   const [period, setPeriod] = useState("daily");
 
-  // 샘플 데이터
-  const dailyData = [
-    { name: "월", value: 80 },
-    { name: "화", value: 65 },
-    { name: "수", value: 90 },
-    { name: "목", value: 75 },
-    { name: "금", value: 85 },
-    { name: "토", value: 70 },
-    { name: "일", value: 95 },
-  ];
-
-  const weeklyData = [
-    { name: "1주", value: 75 },
-    { name: "2주", value: 82 },
-    { name: "3주", value: 68 },
-    { name: "4주", value: 90 },
-  ];
-
-  const monthlyData = [
-    { name: "1월", value: 70 },
-    { name: "2월", value: 80 },
-    { name: "3월", value: 85 },
-    { name: "4월", value: 75 },
-    { name: "5월", value: 90 },
-    { name: "6월", value: 88 },
-  ];
-
-  const yearlyData = [
-    { name: "2022", value: 70 },
-    { name: "2023", value: 78 },
-    { name: "2024", value: 85 },
-    { name: "2025", value: 92 },
-  ];
+  if (!chartData) {
+    return <LoadingSpinner size="medium" message="차트를 불러오는 중..." />;
+  }
 
   const getData = () => {
-    switch (period) {
-      case "daily":
-        return dailyData;
-      case "weekly":
-        return weeklyData;
-      case "monthly":
-        return monthlyData;
-      case "yearly":
-        return yearlyData;
-      default:
-        return dailyData;
-    }
+    const periodData = chartData.find((item) => item.period === period);
+    return periodData ? periodData.data : [];
   };
+
+  const currentData = getData();
+  const hasData = currentData && currentData.length > 0;
 
   return (
     <div className="achievement-chart">
@@ -86,26 +50,38 @@ const AchievementChart = () => {
           </Tabs>
 
           <div className="chart-container">
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={getData()}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e9ecef" />
-                <XAxis dataKey="name" stroke="#6c757d" />
-                <YAxis stroke="#6c757d" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#f8f9fa",
-                    border: "1px solid #dee2e6",
-                    borderRadius: "8px",
-                  }}
-                />
-                <Bar
-                  dataKey="value"
-                  fill="#b8b8f7"
-                  radius={[8, 8, 0, 0]}
-                  barSize={100}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+            {hasData ? (
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={currentData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e9ecef" />
+                  <XAxis dataKey="name" stroke="#6c757d" />
+                  <YAxis
+                    stroke="#6c757d"
+                    domain={[0, 100]}
+                    tickFormatter={(value) => `${value}%`}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#f8f9fa",
+                      border: "1px solid #dee2e6",
+                      borderRadius: "8px",
+                    }}
+                    formatter={(value) => `${value}%`}
+                    labelStyle={{ fontWeight: "600", marginBottom: "4px" }}
+                  />
+                  <Bar
+                    dataKey="value"
+                    fill="#b8b8f7"
+                    radius={[8, 8, 0, 0]}
+                    barSize={100}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="no-data-message">
+                <p>해당 기간의 데이터가 없습니다</p>
+              </div>
+            )}
           </div>
         </div>
       </Container>

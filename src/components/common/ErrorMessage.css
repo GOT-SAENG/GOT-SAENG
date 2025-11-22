@@ -1,0 +1,109 @@
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  min-height: 300px;
+}
+
+.error-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fee 0%, #fcc 100%);
+  margin-bottom: 1.5rem;
+  animation: shake 0.5s ease-in-out;
+}
+
+.error-icon svg {
+  font-size: 2.5rem;
+  color: #dc3545;
+}
+
+.error-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #dc3545;
+  margin-bottom: 0.5rem;
+}
+
+.error-text {
+  font-size: 1rem;
+  color: #6c757d;
+  margin: 0 0 2rem;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error-button {
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.error-button.btn-primary {
+  background-color: #1A6B44;
+  border-color: #1A6B44;
+}
+
+.error-button.btn-primary:hover {
+  background-color: #155a38;
+  border-color: #155a38;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* 반응형 */
+@media (max-width: 576px) {
+  .error-message {
+    padding: 2rem 1rem;
+  }
+
+  .error-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .error-icon svg {
+    font-size: 2rem;
+  }
+
+  .error-title {
+    font-size: 1.25rem;
+  }
+
+  .error-text {
+    font-size: 0.9rem;
+  }
+
+  .error-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .error-button {
+    width: 100%;
+  }
+}

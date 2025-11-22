@@ -1,0 +1,156 @@
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1A6B44 0%, #0d4426 100%);
+  padding: 2rem;
+}
+
+.not-found-content {
+  text-align: center;
+  background: white;
+  padding: 4rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.not-found-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #d4edda 0%, #a8d5ba 100%);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.not-found-icon svg {
+  font-size: 3rem;
+  color: #1A6B44;
+}
+
+.not-found-title {
+  font-size: 6rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin: 0;
+  line-height: 1;
+  background: linear-gradient(135deg, #1A6B44 0%, #0d4426 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.not-found-subtitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2d3436;
+  margin: 1rem 0;
+}
+
+.not-found-message {
+  font-size: 1.1rem;
+  color: #636e72;
+  margin: 1.5rem 0 2.5rem;
+  line-height: 1.6;
+}
+
+.not-found-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.not-found-button {
+  min-width: 150px;
+  font-weight: 500;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.not-found-button.btn-primary {
+  background: linear-gradient(135deg, #1A6B44 0%, #0d4426 100%);
+  border: none;
+}
+
+.not-found-button.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(26, 107, 68, 0.4);
+}
+
+.not-found-button.btn-outline-secondary {
+  border: 2px solid #b2bec3;
+  color: #636e72;
+}
+
+.not-found-button.btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+  border-color: #636e72;
+  color: #2d3436;
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* 반응형 */
+@media (max-width: 576px) {
+  .not-found-content {
+    padding: 3rem 2rem;
+  }
+
+  .not-found-title {
+    font-size: 4rem;
+  }
+
+  .not-found-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .not-found-message {
+    font-size: 1rem;
+  }
+
+  .not-found-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .not-found-icon svg {
+    font-size: 2.5rem;
+  }
+
+  .not-found-actions {
+    flex-direction: column;
+  }
+
+  .not-found-button {
+    width: 100%;
+  }
+}
