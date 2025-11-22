@@ -4,6 +4,7 @@ import HeroSection from "../../components/Home/HeroSection";
 import ProblemSection from "../../components/Home/ProblemSection";
 import SolutionSection from "../../components/Home/SolutionSection";
 import CTASection from "../../components/Home/CTASection";
+import Login from "../../components/Home/Login";
 
 const Home = () => {
   return (
