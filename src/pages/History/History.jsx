@@ -1,9 +1,10 @@
 import React from "react";
-import { useHistory } from "../../hooks/History/useHistory";
+import { useHistory, useUpdateHistoryItem } from "../../hooks/History/useHistory";
 import { useChartData } from "../../hooks/History/useChartData";
-import HistoryHeader from "../../components/History/HistoryHeader";
+import Header from "../../components/common/Header";
 import AchievementChart from "../../components/History/AchievementChart";
 import MonthlyHistoryGrid from "../../components/History/MonthlyHistoryGrid";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import "./History.css";
 
 const History = () => {
@@ -17,9 +18,19 @@ const History = () => {
     isLoading: chartLoading,
     error: chartError,
   } = useChartData();
+  const updateHistoryItem = useUpdateHistoryItem();
+
+  const handleToggleComplete = (monthId, itemId, completed) => {
+    updateHistoryItem.mutate({ monthId, itemId, completed });
+  };
 
   if (historyLoading || chartLoading) {
-    return <div>로딩 중...</div>;
+    return (
+      <div className="history-page">
+        <Header />
+        <LoadingSpinner size="large" message="데이터를 불러오는 중..." />
+      </div>
+    );
   }
 
   if (historyError) {
@@ -29,13 +40,15 @@ const History = () => {
   if (chartError) {
     return <div>ChartData 에러: {chartError.message}</div>;
   }
-  console.log("History 데이터:", historyData);
-  console.log("Chart 데이터:", chartData);
+
   return (
     <div className="history-page">
-      <HistoryHeader />
+      <Header />
       <AchievementChart chartData={chartData} />
-      <MonthlyHistoryGrid historyData={historyData} />
+      <MonthlyHistoryGrid
+        historyData={historyData}
+        onToggleComplete={handleToggleComplete}
+      />
     </div>
   );
 };

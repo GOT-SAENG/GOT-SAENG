@@ -9,13 +9,14 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import LoadingSpinner from "../common/LoadingSpinner";
 import "./AchievementChart.css";
 
 const AchievementChart = ({ chartData }) => {
   const [period, setPeriod] = useState("daily");
 
   if (!chartData) {
-    return <div>데이터를 불러오는 중...</div>;
+    return <LoadingSpinner size="medium" message="차트를 불러오는 중..." />;
   }
 
   const getData = () => {
