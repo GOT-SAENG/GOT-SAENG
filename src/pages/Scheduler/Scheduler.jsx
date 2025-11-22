@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import { useTodosQuery } from "../../hooks/useTodos";
 import ScheduleModal from "../../components/Scheduler/ScheduleModal";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
+import ErrorMessage from "../../components/common/ErrorMessage";
 
 const Scheduler = () => {
   const [modalInfo, setModalInfo] = useState({
@@ -29,12 +31,10 @@ const Scheduler = () => {
 
   const { data: todos, isLoading, isError } = useTodosQuery();
 
-  // 일정 데이터 (범위 일정 포함)
   const scheduleData = React.useMemo(() => {
     if (!todos) return {};
 
     const result = {};
-
     todos.forEach((todo) => {
       if (!todo.startDate) return;
 
@@ -50,7 +50,7 @@ const Scheduler = () => {
           id: todo.id,
           title: todo.title,
           status: todo.status,
-          importance: todo.importance, // <-- 추가!
+          importance: todo.importance,
           isRange: todo.dateType === "range",
           isStart: current.getTime() === start.getTime(),
           isEnd: current.getTime() === end.getTime(),
@@ -64,7 +64,6 @@ const Scheduler = () => {
   }, [todos]);
 
   const [date, setDate] = useState(new Date());
-
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
 
@@ -105,100 +104,110 @@ const Scheduler = () => {
   return (
     <div className="scheduler-page">
       <Header />
-      <Container>
-        {/* 로딩 및 에러 메시지 - UI를 막지 않음 */}
-        {isLoading && (
-          <div className="schedule-info-text">일정 불러오는 중...</div>
-        )}
-        {isError && (
-          <div className="schedule-info-text">일정 불러오기 실패</div>
-        )}
-        {/* 년/월 컨트롤 */}
-        <div className="year-month-box">
-          <div className="ym-left calender-icon">
-            <FontAwesomeIcon
-              icon={faCalendar}
-              size="2x"
-              style={{ color: "#134a2f" }}
-            />
-          </div>
 
-          <div className="ym-center">
-            <button className="btn1" onClick={minusMonth}>
-              ◀
-            </button>
-            <h2 className="ym-text">
-              {year}년 {month}월
-            </h2>
-            <button className="btn1" onClick={plusMonth}>
-              ▶
-            </button>
-          </div>
-
-          <div className="ym-right">
-            <button className="btn2" onClick={goToToday}>
-              오늘
-            </button>
-          </div>
+      {/* 로딩 */}
+      {isLoading && (
+        <div style={{ textAlign: "center", paddingTop: "40px" }}>
+          <LoadingSpinner size="medium" message="일정 불러오는 중..." />
         </div>
+      )}
 
-        {/* 요일 헤더 */}
-        <div className="week-header">
-          {weekDays.map((day) => (
-            <div key={day} className="week-day">
-              {day}
-            </div>
-          ))}
+      {/* 에러 */}
+      {isError && (
+        <div style={{ textAlign: "center", paddingTop: "40px" }}>
+          <ErrorMessage size="small" message="일정 불러오기 실패" />
         </div>
+      )}
 
-        {/* 달력 날짜 */}
-        <div className="calendar-grid">
-          {days.map((d, i) => {
-            let cellYear = year;
-            let cellMonth = month;
-
-            if (d.type === "prev") {
-              cellMonth = month === 1 ? 12 : month - 1;
-              if (month === 1) cellYear = year - 1;
-            }
-
-            if (d.type === "next") {
-              cellMonth = month === 12 ? 1 : month + 1;
-              if (month === 12) cellYear = year + 1;
-            }
-
-            const dateKey = `${cellYear}-${String(cellMonth).padStart(
-              2,
-              "0"
-            )}-${String(d.day).padStart(2, "0")}`;
-
-            const dateSchedules = scheduleData[dateKey] || [];
-
-            const allCompleted =
-              dateSchedules.length > 0 &&
-              dateSchedules.every((s) => s.status === "completed");
-
-            return (
-              <SchedulerCard
-                key={i}
-                day={d.day}
-                type={d.type}
-                year={cellYear}
-                month={cellMonth}
-                schedules={dateSchedules}
-                allCompleted={allCompleted}
-                onOpenModal={handleOpenModal}
+      {/* 로딩/에러가 아닐 때만 달력 출력 */}
+      {!isLoading && !isError && (
+        <Container>
+          {/* 년/월 컨트롤 */}
+          <div className="year-month-box">
+            <div className="ym-left calender-icon">
+              <FontAwesomeIcon
+                icon={faCalendar}
+                size="2x"
+                style={{ color: "#134a2f" }}
               />
-            );
-          })}
-        </div>
-        <ScheduleModal
-          isOpen={modalInfo.isOpen}
-          onClose={handleCloseModal}
-          date={modalInfo.date}
-          schedules={modalInfo.schedules}
-        />
-      </Container>
+            </div>
+
+            <div className="ym-center">
+              <button className="btn1" onClick={minusMonth}>
+                ◀
+              </button>
+              <h2 className="ym-text">
+                {year}년 {month}월
+              </h2>
+              <button className="btn1" onClick={plusMonth}>
+                ▶
+              </button>
+            </div>
+
+            <div className="ym-right">
+              <button className="btn2" onClick={goToToday}>
+                오늘
+              </button>
+            </div>
+          </div>
+
+          {/* 요일 헤더 */}
+          <div className="week-header">
+            {weekDays.map((day) => (
+              <div key={day} className="week-day">
+                {day}
+              </div>
+            ))}
+          </div>
+
+          {/* 달력 */}
+          <div className="calendar-grid">
+            {days.map((d, i) => {
+              let cellYear = year;
+              let cellMonth = month;
+
+              if (d.type === "prev") {
+                cellMonth = month === 1 ? 12 : month - 1;
+                if (month === 1) cellYear = year - 1;
+              }
+
+              if (d.type === "next") {
+                cellMonth = month === 12 ? 1 : month + 1;
+                if (month === 12) cellYear = year + 1;
+              }
+
+              const dateKey = `${cellYear}-${String(cellMonth).padStart(
+                2,
+                "0"
+              )}-${String(d.day).padStart(2, "0")}`;
+              const dateSchedules = scheduleData[dateKey] || [];
+              const allCompleted =
+                dateSchedules.length > 0 &&
+                dateSchedules.every((s) => s.status === "completed");
+
+              return (
+                <SchedulerCard
+                  key={i}
+                  day={d.day}
+                  type={d.type}
+                  year={cellYear}
+                  month={cellMonth}
+                  schedules={dateSchedules}
+                  allCompleted={allCompleted}
+                  onOpenModal={handleOpenModal}
+                />
+              );
+            })}
+          </div>
+
+          <ScheduleModal
+            isOpen={modalInfo.isOpen}
+            onClose={handleCloseModal}
+            date={modalInfo.date}
+            schedules={modalInfo.schedules}
+          />
+        </Container>
+      )}
     </div>
   );
 };

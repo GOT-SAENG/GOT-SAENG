@@ -1,6 +1,7 @@
 .scheduler-page {
   background-color: #134a2f;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
 }
 
 .year-month-box {
