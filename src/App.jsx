@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import History from "./pages/History/History";
 import Scheduler from "./pages/Scheduler/Scheduler";
 import Todo from "./pages/Todo/Todo";
+// import Login from "./components/Home/Login";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import "./TodoItem.style.css";
 import Button from "react-bootstrap/Button";
 
-function TodoItem({ item }) {
+const TodoItem = ({ item, onEdit, onDelete }) => {
   return (
     <div className="todo-item">
       {/* 썸네일 어떤걸로 할까요???????????????????????*/}
@@ -15,11 +15,15 @@ function TodoItem({ item }) {
 
       {/* 오른쪽 버튼 */}
       <div className="todo-actions">
-        <Button className="todo-edit-btn">수정하기</Button>
-        <Button className="todo-delete-btn">삭제하기</Button>
+        <Button className="todo-edit-btn" onClick={() => onEdit(item)}>
+          수정하기
+        </Button>
+        <Button className="todo-delete-btn" onClick={() => onDelete(item)}>
+          삭제하기
+        </Button>
       </div>
     </div>
   );
-}
+};
 
 export default TodoItem;
