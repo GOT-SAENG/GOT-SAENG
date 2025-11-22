@@ -5,14 +5,42 @@
 
 .year-month-box {
   display: flex;
-  background-color: white;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
   height: 80px;
   border: 1px solid #ddd;
   border-radius: 15px;
-  margin: 10px 0;
-  padding: 0 30px;
+  margin: 12px 0;
+  padding: 0 20px;
+  min-width: 1296px;
+}
+
+.ym-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+}
+
+.ym-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-grow: 1;
+}
+
+.ym-text {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ym-right {
+  display: flex;
+  justify-content: center;
+  width: 80px;
 }
 
 /* 가운데 div만 flex-grow 적용 */
@@ -34,6 +62,7 @@
   background-color: white;
   border-radius: 20px;
   font-weight: 600;
+  min-width: 180px;
 }
 
 .calendar-grid {
@@ -65,15 +94,29 @@
   border-radius: 10px;
 }
 
-.calender-icon:hover {
+.calender-icon svg {
+  transform-origin: center center;
+}
+
+
+.calender-icon:hover svg {
   animation: wiggle 0.4s ease-in-out infinite;
 }
 
 @keyframes wiggle {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(8deg); }
-  50% { transform: rotate(-8deg); }
-  75% { transform: rotate(8deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
-

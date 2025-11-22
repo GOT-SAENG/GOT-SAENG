@@ -2,11 +2,67 @@ import React, { useState } from "react";
 import "./Scheduler.style.css";
 import { Container } from "react-bootstrap";
 import SchedulerCard from "../../components/Scheduler/SchedulerCard";
-import HistoryHeader from "../../components/History/HistoryHeader";
+import Header from "../../components/common/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
+import { useTodosQuery } from "../../hooks/useTodos";
+import ScheduleModal from "../../components/Scheduler/ScheduleModal";
 
 const Scheduler = () => {
+  const [modalInfo, setModalInfo] = useState({
+    isOpen: false,
+    date: null,
+    schedules: [],
+  });
+
+  const handleOpenModal = ({ date, schedules }) => {
+    setModalInfo({
+      isOpen: true,
+      date,
+      schedules,
+    });
+  };
+
+  const handleCloseModal = () => {
+    setModalInfo({ ...modalInfo, isOpen: false });
+  };
+
+  const { data: todos, isLoading, isError } = useTodosQuery();
+
+  // 일정 데이터 (범위 일정 포함)
+  const scheduleData = React.useMemo(() => {
+    if (!todos) return {};
+
+    const result = {};
+
+    todos.forEach((todo) => {
+      if (!todo.startDate) return;
+
+      const start = new Date(todo.startDate);
+      const end = todo.dueDate ? new Date(todo.dueDate) : start;
+      const current = new Date(start);
+
+      while (current <= end) {
+        const key = current.toISOString().slice(0, 10);
+
+        if (!result[key]) result[key] = [];
+        result[key].push({
+          id: todo.id,
+          title: todo.title,
+          status: todo.status,
+          importance: todo.importance, // <-- 추가!
+          isRange: todo.dateType === "range",
+          isStart: current.getTime() === start.getTime(),
+          isEnd: current.getTime() === end.getTime(),
+        });
+
+        current.setDate(current.getDate() + 1);
+      }
+    });
+
+    return result;
+  }, [todos]);
+
   const [date, setDate] = useState(new Date());
 
   const year = date.getFullYear();
@@ -16,20 +72,17 @@ const Scheduler = () => {
   const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
   const prevMonthLastDay = new Date(year, month - 1, 0).getDate();
 
-  // 현재 달 날짜 배열
   const currentDays = Array.from({ length: currentMonthLastDay }, (_, i) => ({
     day: i + 1,
     type: "current",
   }));
 
-  // 첫 주 앞 빈칸을 지난달 날짜로 채우기
   const prevDays = Array.from({ length: firstDayOfWeek }, (_, i) => ({
     day: prevMonthLastDay - firstDayOfWeek + i + 1,
     type: "prev",
   }));
 
-  // 다음 달로 채워야 하는 칸 개수 계산 (총 42칸 기준)
-  const totalCells = 42; // 6주 * 7일
+  const totalCells = 42;
   const nextDaysCount = totalCells - (prevDays.length + currentDays.length);
 
   const nextDays = Array.from({ length: nextDaysCount }, (_, i) => ({
@@ -37,42 +90,56 @@ const Scheduler = () => {
     type: "next",
   }));
 
-  // 최종 달력 데이터
   const days = [...prevDays, ...currentDays, ...nextDays];
 
   const minusMonth = () =>
     setDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+
   const plusMonth = () =>
     setDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+
   const goToToday = () => setDate(new Date());
 
   const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
   return (
     <div className="scheduler-page">
-      <HistoryHeader />
+      <Header />
       <Container>
-        {/* 년,월 박스 */}
+        {/* 로딩 및 에러 메시지 - UI를 막지 않음 */}
+        {isLoading && (
+          <div className="schedule-info-text">일정 불러오는 중...</div>
+        )}
+        {isError && (
+          <div className="schedule-info-text">일정 불러오기 실패</div>
+        )}
+        {/* 년/월 컨트롤 */}
         <div className="year-month-box">
-          <div style={{color: '#134A2F'}}>
-            <FontAwesomeIcon icon={faCalendar} size="2x" className="calender-icon"/>
+          <div className="ym-left calender-icon">
+            <FontAwesomeIcon
+              icon={faCalendar}
+              size="2x"
+              style={{ color: "#134a2f" }}
+            />
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <button className="btn1" onClick={minusMonth}>◀</button>
-            <h2 style={{ width: "200px", margin: "0"}}>
+          <div className="ym-center">
+            <button className="btn1" onClick={minusMonth}>
+              ◀
+            </button>
+            <h2 className="ym-text">
               {year}년 {month}월
             </h2>
-            <button className="btn1" onClick={plusMonth}>▶</button>
+            <button className="btn1" onClick={plusMonth}>
+              ▶
+            </button>
           </div>
-          <button className="btn2" onClick={goToToday}>오늘</button>
+
+          <div className="ym-right">
+            <button className="btn2" onClick={goToToday}>
+              오늘
+            </button>
+          </div>
         </div>
 
         {/* 요일 헤더 */}
@@ -84,18 +151,53 @@ const Scheduler = () => {
           ))}
         </div>
 
-        {/* 날짜 표시 */}
+        {/* 달력 날짜 */}
         <div className="calendar-grid">
-          {days.map((d, i) => (
-            <SchedulerCard
-              key={i}
-              day={d.day}
-              type={d.type}
-              year={year}
-              month={month}
-            />
-          ))}
+          {days.map((d, i) => {
+            let cellYear = year;
+            let cellMonth = month;
+
+            if (d.type === "prev") {
+              cellMonth = month === 1 ? 12 : month - 1;
+              if (month === 1) cellYear = year - 1;
+            }
+
+            if (d.type === "next") {
+              cellMonth = month === 12 ? 1 : month + 1;
+              if (month === 12) cellYear = year + 1;
+            }
+
+            const dateKey = `${cellYear}-${String(cellMonth).padStart(
+              2,
+              "0"
+            )}-${String(d.day).padStart(2, "0")}`;
+
+            const dateSchedules = scheduleData[dateKey] || [];
+
+            const allCompleted =
+              dateSchedules.length > 0 &&
+              dateSchedules.every((s) => s.status === "completed");
+
+            return (
+              <SchedulerCard
+                key={i}
+                day={d.day}
+                type={d.type}
+                year={cellYear}
+                month={cellMonth}
+                schedules={dateSchedules}
+                allCompleted={allCompleted}
+                onOpenModal={handleOpenModal}
+              />
+            );
+          })}
         </div>
+        <ScheduleModal
+          isOpen={modalInfo.isOpen}
+          onClose={handleCloseModal}
+          date={modalInfo.date}
+          schedules={modalInfo.schedules}
+        />
       </Container>
     </div>
   );
