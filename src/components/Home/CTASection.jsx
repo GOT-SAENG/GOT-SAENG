@@ -2,6 +2,7 @@ import React from "react";
 
 // 페이지 이동을 위한 useNavigate 훅을 불러오기
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 // Call To Action
 // 사용자에게 행동을 유도하는 섹션 컴포넌트
@@ -10,10 +11,18 @@ const CTASection = () => {
   // 페이지 이동을 위한 navigate 함수를 가져오기
   const navigate = useNavigate();
 
+  // 로그인 상태를 확인하는 함수
+  const { isAuthenticated } = useAuth();
+
   // 시작하기 버튼을 클릭했을 때 실행되는 함수
   const handleStartClick = () => {
-    // '/login' 경로로 이동합니다
-    navigate("/login");
+    // 로그인이 되어 있으면 /todo로 이동
+    // 로그인이 안되어 있으면 '/login' 경로로 이동
+    if (!isAuthenticated) {
+      navigate("/todo");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
