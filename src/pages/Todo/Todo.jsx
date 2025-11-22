@@ -152,7 +152,7 @@ const Todo = () => {
             onEdit={handleEditTodo} // 수정하기
             onDelete={handleDeleteTodo} // 삭제하기
           />
-          {showAIPriority && <AIPriority todos={todos} />}
+          {showAIPriority && <AIPriority todos={todos || []} />}
         </div>
 
         {/* AI추천받기버튼 */}

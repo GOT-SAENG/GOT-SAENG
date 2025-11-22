@@ -100,6 +100,82 @@
   color: #155724;
 }
 
+.priority-reason {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.ai-day-block {
+  margin-bottom: 32px;
+}
+
+.ai-day-block:last-child {
+  margin-bottom: 0;
+}
+
+.ai-day-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #134a2f;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #134a2f;
+}
+
+.empty-message {
+  padding: 24px;
+  text-align: center;
+  color: #999;
+  font-size: 0.95rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #e0e0e0;
+}
+
+.error-box {
+  padding: 16px;
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 8px;
+  border: 1px solid #f5c6cb;
+  margin-top: 16px;
+  font-size: 0.95rem;
+}
+
+.debug-box {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 0.85rem;
+}
+
+.debug-box pre {
+  margin: 8px 0 0 0;
+  padding: 12px;
+  background: #ffffff;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.debug-box summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #134a2f;
+  padding: 8px;
+  user-select: none;
+}
+
+.debug-box summary:hover {
+  background: #e8f5e9;
+  border-radius: 4px;
+}
+
 @media (max-width: 768px) {
   .ai-priority-container {
     padding: 20px;
@@ -128,5 +204,61 @@
   .priority-badge {
     font-size: 0.75rem;
     padding: 5px 10px;
+  }
+}
+
+.month-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.month-filter label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.month-select {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 150px;
+}
+
+.month-select:hover {
+  border-color: #134a2f;
+}
+
+.month-select:focus {
+  outline: none;
+  border-color: #134a2f;
+  box-shadow: 0 0 0 3px rgba(19, 74, 47, 0.1);
+}
+
+.ai-priority-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+@media (max-width: 768px) {
+  .month-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .month-select {
+    width: 100%;
   }
 }
