@@ -24,6 +24,9 @@ const AchievementChart = ({ chartData }) => {
     return periodData ? periodData.data : [];
   };
 
+  const currentData = getData();
+  const hasData = currentData && currentData.length > 0;
+
   return (
     <div className="achievement-chart">
       <Container>
@@ -47,26 +50,38 @@ const AchievementChart = ({ chartData }) => {
           </Tabs>
 
           <div className="chart-container">
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={getData()}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e9ecef" />
-                <XAxis dataKey="name" stroke="#6c757d" />
-                <YAxis stroke="#6c757d" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#f8f9fa",
-                    border: "1px solid #dee2e6",
-                    borderRadius: "8px",
-                  }}
-                />
-                <Bar
-                  dataKey="value"
-                  fill="#b8b8f7"
-                  radius={[8, 8, 0, 0]}
-                  barSize={100}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+            {hasData ? (
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={currentData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e9ecef" />
+                  <XAxis dataKey="name" stroke="#6c757d" />
+                  <YAxis
+                    stroke="#6c757d"
+                    domain={[0, 100]}
+                    tickFormatter={(value) => `${value}%`}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#f8f9fa",
+                      border: "1px solid #dee2e6",
+                      borderRadius: "8px",
+                    }}
+                    formatter={(value) => `${value}%`}
+                    labelStyle={{ fontWeight: "600", marginBottom: "4px" }}
+                  />
+                  <Bar
+                    dataKey="value"
+                    fill="#b8b8f7"
+                    radius={[8, 8, 0, 0]}
+                    barSize={100}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="no-data-message">
+                <p>해당 기간의 데이터가 없습니다</p>
+              </div>
+            )}
           </div>
         </div>
       </Container>
