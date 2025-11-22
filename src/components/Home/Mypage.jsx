@@ -163,7 +163,7 @@ const Mypage = () => {
 
           {/* 비밀번호 변경 섹션 */}
           <div className="password-change-section">
-            <h3 className="section-title">비밀번호 변경</h3>
+            <h3 className="section-area">비밀번호 변경</h3>
             <p className="section-description">영문, 숫자를 포함한 6자 이상으로 입력해주세요.</p>
 
             {/* 현재 비밀번호 */}
