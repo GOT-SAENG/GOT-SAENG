@@ -1,8 +1,7 @@
 .ai-priority-container {
-  background: #ffffff;
+  background: #eaf5ec;
   border-radius: 16px;
   padding: 28px 32px;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04); */
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -47,7 +46,6 @@
 .ai-priority-item:hover {
   background: #f0f0f0;
   border-color: #134a2f;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transform: translateY(-1px);
 }
 
@@ -63,7 +61,6 @@
   font-weight: 600;
   font-size: 1rem;
   flex-shrink: 0;
-  box-shadow: 0 2px 4px rgba(19, 74, 47, 0.2);
 }
 
 .priority-task {
@@ -239,7 +236,6 @@
 .month-select:focus {
   outline: none;
   border-color: #134a2f;
-  box-shadow: 0 0 0 3px rgba(19, 74, 47, 0.1);
 }
 
 .ai-priority-header {

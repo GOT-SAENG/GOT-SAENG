@@ -1,25 +1,56 @@
-// src/components/Todo/AIPriority.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getTodoPriorityByAI } from "../../utils/api";
 import "./AIPriority.style.css";
 
-// 특정 년/월의 할 일 필터링
 const getTodosByMonth = (todos, year, month) => {
   return todos.filter((todo) => {
     if (!todo.startDate) return false;
-    const d = new Date(todo.startDate);
-    return d.getFullYear() === year && d.getMonth() === month;
+
+    const startDate = new Date(todo.startDate);
+    const startYear = startDate.getFullYear();
+    const startMonth = startDate.getMonth();
+
+    if (todo.dateType === "range" && todo.dueDate) {
+      const dueDate = new Date(todo.dueDate);
+      const dueYear = dueDate.getFullYear();
+      const dueMonth = dueDate.getMonth();
+
+      const isStartInMonth = startYear === year && startMonth === month;
+      const isDueInMonth = dueYear === year && dueMonth === month;
+
+      const targetDate = new Date(year, month, 1);
+      const isMonthInRange = startDate <= targetDate && targetDate <= dueDate;
+
+      return isStartInMonth || isDueInMonth || isMonthInRange;
+    } else {
+      return startYear === year && startMonth === month;
+    }
   });
 };
 
-// todos에서 사용 가능한 년/월 목록 추출
 const getAvailableMonths = (todos) => {
   const monthSet = new Set();
+
   todos.forEach((todo) => {
-    if (todo.startDate) {
-      const d = new Date(todo.startDate);
-      const key = `${d.getFullYear()}-${d.getMonth()}`;
-      monthSet.add(key);
+    if (!todo.startDate) return;
+
+    const startDate = new Date(todo.startDate);
+    const startKey = `${startDate.getFullYear()}-${startDate.getMonth()}`;
+    monthSet.add(startKey);
+
+    if (todo.dateType === "range" && todo.dueDate) {
+      const dueDate = new Date(todo.dueDate);
+      const dueKey = `${dueDate.getFullYear()}-${dueDate.getMonth()}`;
+      monthSet.add(dueKey);
+
+      const currentDate = new Date(startDate);
+      currentDate.setDate(1);
+
+      while (currentDate <= dueDate) {
+        const key = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
+        monthSet.add(key);
+        currentDate.setMonth(currentDate.getMonth() + 1);
+      }
     }
   });
 
@@ -29,23 +60,101 @@ const getAvailableMonths = (todos) => {
       return { year, month, key };
     })
     .sort((a, b) => {
-      if (a.year !== b.year) return b.year - a.year; // 최신 년도 먼저
-      return b.month - a.month; // 최신 월 먼저
+      if (a.year !== b.year) return b.year - a.year;
+      return b.month - a.month;
     });
 };
 
-// 날짜별 그룹 묶기
 const groupByDate = (todos) => {
   const groups = {};
+
   todos.forEach((todo) => {
-    const day = todo.startDate;
-    if (!groups[day]) groups[day] = [];
-    groups[day].push(todo);
+    if (!todo.startDate) return;
+
+    const startDate = new Date(todo.startDate);
+    startDate.setHours(0, 0, 0, 0);
+
+    if (todo.dateType === "range" && todo.dueDate) {
+      const dueDate = new Date(todo.dueDate);
+      dueDate.setHours(0, 0, 0, 0);
+
+      const currentDate = new Date(startDate);
+
+      while (currentDate <= dueDate) {
+        const dateKey = currentDate.toISOString().split("T")[0];
+
+        if (!groups[dateKey]) {
+          groups[dateKey] = [];
+        }
+        groups[dateKey].push(todo);
+
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+    } else {
+      const dateKey = startDate.toISOString().split("T")[0];
+      if (!groups[dateKey]) {
+        groups[dateKey] = [];
+      }
+      groups[dateKey].push(todo);
+    }
   });
+
   return groups;
 };
 
-// 년/월을 한국어로 표시
+const getDateHash = (todos) => {
+  const hashParts = todos
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map((t) => {
+      return JSON.stringify({
+        id: t.id,
+        title: t.title || "",
+        importance: t.importance || 0,
+        dueDate: t.dueDate || "",
+        startDate: t.startDate || "",
+        description: t.description || "",
+        estimatedTime: t.estimatedTime || 0,
+        category: t.category || "",
+      });
+    });
+
+  return hashParts.join("||");
+};
+
+const invalidateCacheForTodo = (cache, todoId, startDate) => {
+  if (startDate && cache[startDate]) {
+    const cached = cache[startDate];
+    if (cached && cached.result) {
+      const hasTodo = cached.result.some((item) => item.id === todoId);
+      if (hasTodo) {
+        delete cache[startDate];
+      }
+    }
+  }
+};
+
+const cleanupOldCache = (cache, maxDays = 90) => {
+  const now = new Date();
+  const keysToDelete = [];
+
+  for (const dateKey in cache) {
+    try {
+      const date = new Date(dateKey);
+      const daysDiff = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+
+      if (daysDiff > maxDays) {
+        keysToDelete.push(dateKey);
+      }
+    } catch {
+      keysToDelete.push(dateKey);
+    }
+  }
+
+  keysToDelete.forEach((key) => {
+    delete cache[key];
+  });
+};
+
 const formatMonthYear = (year, month) => {
   const monthNames = [
     "1월",
@@ -70,43 +179,65 @@ const AIPriority = ({ todos = [] }) => {
   const [aiError, setAiError] = useState(null);
   const [rawData, setRawData] = useState(null);
 
-  // 현재 선택된 년/월 상태
   const today = new Date();
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth());
 
-  // 사용 가능한 월 목록
   const availableMonths = getAvailableMonths(todos || []);
 
+  const cacheRef = useRef({});
+  const prevTodosRef = useRef([]);
+
   useEffect(() => {
-    console.log("🔍 AIPriority - todos 받음:", todos);
-    console.log("📅 선택된 년/월:", selectedYear, selectedMonth);
+    const cache = cacheRef.current;
+    const prevTodos = prevTodosRef.current;
+
+    if (prevTodos.length > 0) {
+      const currentTodoIds = new Set(todos.map((t) => t.id));
+
+      prevTodos.forEach((prevTodo) => {
+        if (!currentTodoIds.has(prevTodo.id)) {
+          invalidateCacheForTodo(cache, prevTodo.id, prevTodo.startDate);
+        }
+      });
+
+      todos.forEach((currentTodo) => {
+        const prevTodo = prevTodos.find((t) => t.id === currentTodo.id);
+        if (prevTodo) {
+          const prevHash = getDateHash([prevTodo]);
+          const currentHash = getDateHash([currentTodo]);
+
+          if (prevHash !== currentHash) {
+            invalidateCacheForTodo(
+              cache,
+              currentTodo.id,
+              currentTodo.startDate
+            );
+          }
+        }
+      });
+    }
+
+    prevTodosRef.current = [...todos];
+    cleanupOldCache(cache, 90);
 
     if (!todos || todos.length === 0) {
-      console.log("⚠️ AIPriority - todos가 없거나 빈 배열입니다.");
       setDailyPriorities({});
       setIsLoading(false);
       return;
     }
 
-    // 선택된 년/월의 할 일 필터링
     let todosToProcess = getTodosByMonth(todos, selectedYear, selectedMonth);
-    console.log("📅 필터링된 할 일:", todosToProcess);
 
-    // 선택된 월에 할 일이 없으면 빈 상태 표시
     if (todosToProcess.length === 0) {
-      console.log("⚠️ 선택된 월에 할 일이 없습니다.");
       setDailyPriorities({});
       setIsLoading(false);
       return;
     }
 
     const grouped = groupByDate(todosToProcess);
-    console.log("📦 날짜별 그룹:", grouped);
 
-    // 그룹이 없으면 종료
     if (Object.keys(grouped).length === 0) {
-      console.log("⚠️ 그룹이 없습니다.");
       setDailyPriorities({});
       setIsLoading(false);
       return;
@@ -121,39 +252,46 @@ const AIPriority = ({ todos = [] }) => {
         for (const day in grouped) {
           const list = grouped[day];
 
-          // 빈 배열이면 건너뛰기
           if (list.length === 0) continue;
 
-          console.log(`📅 ${day} 날짜의 할 일:`, list);
+          const dateHash = getDateHash(list);
+          const cached = cache[day];
 
-          const aiResult = await getTodoPriorityByAI(list);
-          console.log(`✅ ${day} AI 결과:`, aiResult);
-
-          // AI 결과가 배열인지 확인
-          if (Array.isArray(aiResult)) {
-            results[day] = aiResult.sort((a, b) => a.rank - b.rank);
+          if (cached && cached.hash === dateHash) {
+            results[day] = cached.result;
           } else {
-            console.warn(
-              `⚠️ ${day} 날짜의 AI 결과가 배열이 아닙니다:`,
-              aiResult
-            );
-            // 기본값 설정
-            results[day] = list.map((todo, idx) => ({
-              id: todo.id,
-              rank: idx + 1,
-              level: "medium",
-              reason: "AI 분석 실패",
-            }));
+            const aiResult = await getTodoPriorityByAI(list);
+
+            if (Array.isArray(aiResult)) {
+              const sortedResult = aiResult.sort((a, b) => a.rank - b.rank);
+              results[day] = sortedResult;
+
+              cache[day] = {
+                hash: dateHash,
+                result: sortedResult,
+              };
+            } else {
+              const fallbackResult = list.map((todo, idx) => ({
+                id: todo.id,
+                rank: idx + 1,
+                level: "medium",
+                reason: "AI 분석 실패",
+              }));
+              results[day] = fallbackResult;
+
+              cache[day] = {
+                hash: dateHash,
+                result: fallbackResult,
+              };
+            }
           }
         }
 
         setDailyPriorities(results);
         setRawData(results);
       } catch (err) {
-        console.error("❌ AI 에러:", err);
         setAiError(`AI 우선순위 추천 실패: ${err.message}`);
 
-        // 에러 발생 시 기본값으로 표시
         const fallbackResults = {};
         for (const day in grouped) {
           const list = grouped[day];
@@ -171,15 +309,13 @@ const AIPriority = ({ todos = [] }) => {
     };
 
     fetchAI();
-  }, [todos, selectedYear, selectedMonth]); // selectedYear, selectedMonth 의존성 추가
+  }, [todos, selectedYear, selectedMonth]);
 
-  // 월 변경 핸들러
   const handleMonthChange = (year, month) => {
     setSelectedYear(year);
     setSelectedMonth(month);
   };
 
-  // 로딩 중
   if (isLoading) {
     return (
       <div className="ai-priority-container">
@@ -211,7 +347,6 @@ const AIPriority = ({ todos = [] }) => {
     );
   }
 
-  // 에러 발생
   if (aiError) {
     return (
       <div className="ai-priority-container">
@@ -249,10 +384,7 @@ const AIPriority = ({ todos = [] }) => {
     );
   }
 
-  // 결과가 없을 때
   const sortedDays = Object.keys(dailyPriorities).sort();
-  console.log("📊 dailyPriorities:", dailyPriorities);
-  console.log("📊 sortedDays:", sortedDays);
 
   if (sortedDays.length === 0) {
     return (
@@ -287,7 +419,6 @@ const AIPriority = ({ todos = [] }) => {
     );
   }
 
-  // 결과 표시
   return (
     <div className="ai-priority-container">
       <div className="ai-priority-header">
@@ -353,13 +484,12 @@ const AIPriority = ({ todos = [] }) => {
         );
       })}
 
-      {/* 디버깅용: 원본 데이터 표시 (개발 모드일 때만) */}
-      {import.meta.env.DEV && rawData && (
+      {/* {import.meta.env.DEV && rawData && (
         <details className="debug-box">
           <summary>🔍 디버그: 원본 데이터 보기</summary>
           <pre>{JSON.stringify(rawData, null, 2)}</pre>
         </details>
-      )}
+      )} */}
     </div>
   );
 };

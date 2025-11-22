@@ -7,7 +7,7 @@ export const getTodoPriorityByAI = async (todos) => {
     throw new Error("Gemini API 키가 설정되지 않았습니다.");
   }
 
-  // v1 API 사용 (v1beta 대신)
+  // 제미나이 2.0 으로
   const url = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-lite:generateContent?key=${MY_API_KEY}`;
 
   const prompt = `
