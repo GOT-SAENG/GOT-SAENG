@@ -9,7 +9,11 @@ const TodoItem = ({ item, onEdit, onDelete }) => {
 
       {/* 가운데(왼쪽?) 텍스트 */}
       <div className="todo-text">
-        <div className="todo-date">{item.startDate}</div>
+        <div className="todo-date">
+          {item.dateType === "range" && item.dueDate
+            ? `${item.startDate} ~ ${item.dueDate}`
+            : item.startDate}
+        </div>
         <div className="todo-title">{item.title}</div>
       </div>
 

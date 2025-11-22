@@ -1,7 +1,7 @@
 {
   "history": [
     {
-      "id": 1,
+      "id": "1",
       "year": 2025,
       "month": 1,
       "items": [
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "year": 2025,
       "month": 2,
       "items": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "year": 2025,
       "month": 3,
       "items": [
@@ -42,7 +42,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "year": 2025,
       "month": 4,
       "items": [
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "year": 2025,
       "month": 5,
       "items": [
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "year": 2025,
       "month": 6,
       "items": [
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": "7",
       "year": 2025,
       "month": 7,
       "items": [
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": "8",
       "year": 2025,
       "month": 8,
       "items": [
@@ -105,7 +105,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": "9",
       "year": 2025,
       "month": 9,
       "items": [
@@ -117,7 +117,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": "10",
       "year": 2025,
       "month": 10,
       "items": [
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": "11",
       "year": 2025,
       "month": 11,
       "items": [
@@ -143,7 +143,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": "12",
       "year": 2025,
       "month": 12,
       "items": [
@@ -159,50 +159,364 @@
   ],
   "chartData": [
     {
-      "id": 1,
+      "id": "1",
       "period": "daily",
       "data": [
-        { "name": "월", "value": 80 },
-        { "name": "화", "value": 65 },
-        { "name": "수", "value": 90 },
-        { "name": "목", "value": 75 },
-        { "name": "금", "value": 85 },
-        { "name": "토", "value": 70 },
-        { "name": "일", "value": 95 }
+        {
+          "name": "월",
+          "value": 80
+        },
+        {
+          "name": "화",
+          "value": 65
+        },
+        {
+          "name": "수",
+          "value": 90
+        },
+        {
+          "name": "목",
+          "value": 75
+        },
+        {
+          "name": "금",
+          "value": 85
+        },
+        {
+          "name": "토",
+          "value": 70
+        },
+        {
+          "name": "일",
+          "value": 95
+        }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "period": "weekly",
       "data": [
-        { "name": "1주", "value": 75 },
-        { "name": "2주", "value": 82 },
-        { "name": "3주", "value": 68 },
-        { "name": "4주", "value": 90 }
+        {
+          "name": "1주",
+          "value": 75
+        },
+        {
+          "name": "2주",
+          "value": 82
+        },
+        {
+          "name": "3주",
+          "value": 68
+        },
+        {
+          "name": "4주",
+          "value": 90
+        }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "period": "monthly",
       "data": [
-        { "name": "1월", "value": 70 },
-        { "name": "2월", "value": 80 },
-        { "name": "3월", "value": 85 },
-        { "name": "4월", "value": 75 },
-        { "name": "5월", "value": 90 },
-        { "name": "6월", "value": 88 }
+        {
+          "name": "1월",
+          "value": 70
+        },
+        {
+          "name": "2월",
+          "value": 80
+        },
+        {
+          "name": "3월",
+          "value": 85
+        },
+        {
+          "name": "4월",
+          "value": 75
+        },
+        {
+          "name": "5월",
+          "value": 90
+        },
+        {
+          "name": "6월",
+          "value": 88
+        }
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "period": "yearly",
       "data": [
-        { "name": "2022", "value": 70 },
-        { "name": "2023", "value": 78 },
-        { "name": "2024", "value": 85 },
-        { "name": "2025", "value": 92 }
+        {
+          "name": "2022",
+          "value": 70
+        },
+        {
+          "name": "2023",
+          "value": 78
+        },
+        {
+          "name": "2024",
+          "value": 85
+        },
+        {
+          "name": "2025",
+          "value": 92
+        }
       ]
     }
   ],
-  "todos": []
+  "todos": [
+    {
+      "id": "1",
+      "title": "리액트 기초 공부",
+      "description": "컴포넌트 라이프사이클 및 Hooks 개념 정리하기",
+      "importance": 3,
+      "estimatedTime": 120,
+      "dateType": "single",
+      "startDate": "2024-05-20",
+      "dueDate": null,
+      "category": "공부",
+      "isAlarm": true,
+      "createdAt": "2024-05-19T09:00:00.000Z",
+      "updatedAt": "2024-05-19T09:00:00.000Z",
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "status": "completed"
+    },
+    {
+      "id": "2",
+      "title": "프로젝트 기획서 작성",
+      "description": "기능 명세서 및 UI 프로토타입 초안 작성",
+      "importance": 4,
+      "estimatedTime": 300,
+      "dateType": "range",
+      "startDate": "2024-05-21",
+      "dueDate": "2024-05-23",
+      "category": "업무",
+      "isAlarm": false,
+      "createdAt": "2024-05-20T14:30:00.000Z",
+      "updatedAt": "2024-05-21T10:00:00.000Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "progress"
+    },
+    {
+      "id": "3",
+      "title": "한강 러닝 5km",
+      "description": "체력 증진을 위한 가벼운 조깅",
+      "importance": 2,
+      "estimatedTime": 45,
+      "dateType": "single",
+      "startDate": "2024-05-24",
+      "dueDate": null,
+      "category": "운동",
+      "isAlarm": true,
+      "createdAt": "2024-05-22T07:00:00.000Z",
+      "updatedAt": "2024-05-22T07:00:00.000Z",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "status": "pending"
+    },
+    {
+      "id": "4",
+      "title": "주간 팀 회의",
+      "description": "지난주 이슈 공유 및 이번주 스프린트 계획",
+      "importance": 3,
+      "estimatedTime": 60,
+      "dateType": "single",
+      "startDate": "2024-05-27",
+      "dueDate": null,
+      "category": "업무",
+      "isAlarm": true,
+      "createdAt": "2024-05-23T09:00:00.000Z",
+      "updatedAt": "2024-05-23T09:00:00.000Z",
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "status": "pending"
+    },
+    {
+      "id": "5",
+      "title": "대형마트 장보기",
+      "description": "우유, 계란, 야채, 세제 구입",
+      "importance": 1,
+      "estimatedTime": 90,
+      "dateType": "single",
+      "startDate": "2024-05-25",
+      "dueDate": null,
+      "category": "집안일",
+      "isAlarm": false,
+      "createdAt": "2024-05-24T18:00:00.000Z",
+      "updatedAt": "2024-05-24T18:00:00.000Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    },
+    {
+      "id": "6",
+      "title": "알고리즘 문제 풀이",
+      "description": "백준 골드 레벨 3문제 도전",
+      "importance": 3,
+      "estimatedTime": 120,
+      "dateType": "single",
+      "startDate": "2024-05-26",
+      "dueDate": null,
+      "category": "공부",
+      "isAlarm": false,
+      "createdAt": "2024-05-25T10:00:00.000Z",
+      "updatedAt": "2024-05-26T15:00:00.000Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "progress"
+    },
+    {
+      "id": "7",
+      "title": "치과 정기 검진",
+      "description": "스케일링 및 충치 확인 예약",
+      "importance": 2,
+      "estimatedTime": 60,
+      "dateType": "single",
+      "startDate": "2024-05-30",
+      "dueDate": null,
+      "category": "건강",
+      "isAlarm": true,
+      "createdAt": "2024-05-20T11:00:00.000Z",
+      "updatedAt": "2024-05-20T11:00:00.000Z",
+      "startTime": "14:00",
+      "endTime": "15:00",
+      "status": "pending"
+    },
+    {
+      "id": "8",
+      "title": "기술 블로그 포스팅",
+      "description": "최근 해결한 트러블 슈팅 경험 정리",
+      "importance": 2,
+      "estimatedTime": 180,
+      "dateType": "range",
+      "startDate": "2024-05-28",
+      "dueDate": "2024-05-31",
+      "category": "공부",
+      "isAlarm": false,
+      "createdAt": "2024-05-27T20:00:00.000Z",
+      "updatedAt": "2024-05-27T20:00:00.000Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    },
+    {
+      "id": "9",
+      "title": "공과금 납부",
+      "description": "전기세, 가스비, 관리비 이체",
+      "importance": 4,
+      "estimatedTime": 10,
+      "dateType": "single",
+      "startDate": "2024-05-25",
+      "dueDate": null,
+      "category": "집안일",
+      "isAlarm": true,
+      "createdAt": "2024-05-24T09:00:00.000Z",
+      "updatedAt": "2024-05-25T09:30:00.000Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "completed"
+    },
+    {
+      "id": "10",
+      "title": "친구 생일 파티",
+      "description": "강남역 저녁 약속, 선물 챙기기",
+      "importance": 3,
+      "estimatedTime": 240,
+      "dateType": "single",
+      "startDate": "2024-06-01",
+      "dueDate": null,
+      "category": "약속",
+      "isAlarm": true,
+      "createdAt": "2024-05-28T12:00:00.000Z",
+      "updatedAt": "2024-05-28T12:00:00.000Z",
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "status": "pending"
+    },
+    {
+      "id": "c34f",
+      "title": "안ㄴ녕",
+      "description": "",
+      "importance": 2,
+      "dateType": "single",
+      "startDate": "2025-11-24",
+      "dueDate": null,
+      "category": "기타",
+      "isAlarm": false,
+      "createdAt": "2025-11-22T02:32:06.777Z",
+      "updatedAt": "2025-11-22T02:32:06.777Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    },
+    {
+      "id": "017e",
+      "title": "메롱22",
+      "description": "",
+      "importance": 2,
+      "dateType": "single",
+      "startDate": "2025-11-22",
+      "dueDate": null,
+      "category": "기타",
+      "isAlarm": false,
+      "createdAt": "2025-11-22T02:50:22.413Z",
+      "updatedAt": "2025-11-22T06:13:27.231Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    },
+    {
+      "id": "cb99",
+      "title": "청소하기",
+      "description": "",
+      "importance": 2,
+      "dateType": "range",
+      "startDate": "2025-11-22",
+      "dueDate": "2025-11-24",
+      "category": "기타",
+      "isAlarm": false,
+      "createdAt": "2025-11-22T06:14:38.414Z",
+      "updatedAt": "2025-11-22T06:14:38.414Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    },
+    {
+      "id": "aab0",
+      "title": "면접 준비하기",
+      "description": "",
+      "importance": 2,
+      "dateType": "range",
+      "startDate": "2025-11-22",
+      "dueDate": "2025-11-28",
+      "category": "기타",
+      "isAlarm": false,
+      "createdAt": "2025-11-22T06:15:02.691Z",
+      "updatedAt": "2025-11-22T06:15:02.691Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    },
+    {
+      "id": "10f3",
+      "title": "장보기",
+      "description": "",
+      "importance": 2,
+      "dateType": "range",
+      "startDate": "2025-11-22",
+      "dueDate": "2025-12-04",
+      "category": "기타",
+      "isAlarm": false,
+      "createdAt": "2025-11-22T06:15:38.353Z",
+      "updatedAt": "2025-11-22T06:21:15.641Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    }
+  ]
 }
