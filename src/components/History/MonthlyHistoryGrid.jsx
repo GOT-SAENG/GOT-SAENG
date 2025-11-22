@@ -14,7 +14,7 @@ const MonthlyHistoryGrid = ({ historyData }) => {
   }
 
   // 전체 히스토리 데이터가 없을 때
-  if (!historyData || historyData.length === 0) {
+  if (historyData.length === 0) {
     return (
       <div className="monthly-history-grid">
         <Container>
