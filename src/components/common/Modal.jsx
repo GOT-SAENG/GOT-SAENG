@@ -51,7 +51,6 @@ const Modal = ({
         </button>
 
         {title && <h2 className="modal-title">{title}</h2>}
-
         {message && <p className="modal-message">{message}</p>}
 
         {children && <div className="modal-content">{children}</div>}
@@ -67,6 +66,7 @@ const Modal = ({
                 {cancelText}
               </button>
             )}
+
             {onConfirm && (
               <button
                 type="button"

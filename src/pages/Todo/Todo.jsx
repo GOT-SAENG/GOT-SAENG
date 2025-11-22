@@ -3,8 +3,9 @@ import TodoHeader from "../../components/Todo/TodoHeader";
 import TodoList from "../../components/Todo/TodoList";
 import AIPriority from "../../components/Todo/AIPriority";
 import TodoModal from "../../components/Todo/TodoModal";
-import Modal from "../../common/Modal";
+import Modal from "../../components/common/Modal";
 import "./Todo.style.css";
+import Header from "../../components/common/Header";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
@@ -157,6 +158,7 @@ const Todo = () => {
 
   return (
     <div className="todo-container">
+      <Header />
       <div className="todo-page">
         <div className="todo-content">
           <TodoHeader onAddTodo={handleAddTodo} />
