@@ -145,6 +145,26 @@ const Todo = () => {
     setIsDeleteModalOpen(true);
   };
 
+  // Todo 완료/미완료 토글
+  const handleToggleComplete = async (todo) => {
+    const newStatus = todo.status === "completed" ? "pending" : "completed";
+    const updatedTodo = {
+      ...todo,
+      status: newStatus,
+      updatedAt: new Date().toISOString(),
+    };
+
+    try {
+      await updateTodoMutation.mutateAsync(updatedTodo);
+
+      // 목록 자동 새로고침
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    } catch (err) {
+      console.error(err);
+      alert("상태 변경에 실패했습니다.");
+    }
+  };
+
   // Todo 삭제 확인
   const handleConfirmDelete = async () => {
     if (!todoToDelete) return;
@@ -260,6 +280,7 @@ const Todo = () => {
             todos={filteredTodos}
             onEdit={handleEditTodo} // 수정하기
             onDelete={handleDeleteTodo} // 삭제하기
+            onToggleComplete={handleToggleComplete} // 완료/미완료 토글
           />
           {showAIPriority && <AIPriority todos={filteredTodos || []} />}
         </div>
