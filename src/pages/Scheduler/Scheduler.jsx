@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./Scheduler.style.css";
 import { Container } from "react-bootstrap";
 import SchedulerCard from "../../components/Scheduler/SchedulerCard";
+import HistoryHeader from "../../components/History/HistoryHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 
 const Scheduler = () => {
   const [date, setDate] = useState(new Date());
@@ -46,17 +49,30 @@ const Scheduler = () => {
   const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
   return (
-    <div className="scheduler-background">
+    <div className="scheduler-page">
+      <HistoryHeader />
       <Container>
         {/* 년,월 박스 */}
         <div className="year-month-box">
-          <div>아이콘</div>
-          <div>
-            <button onClick={minusMonth}>◀</button>
-            {year}년 {month}월
-            <button onClick={plusMonth}>▶</button>
+          <div style={{color: '#134A2F'}}>
+            <FontAwesomeIcon icon={faCalendar} size="2x" className="calender-icon"/>
           </div>
-          <button onClick={goToToday}>오늘</button>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <button className="btn1" onClick={minusMonth}>◀</button>
+            <h2 style={{ width: "200px", margin: "0"}}>
+              {year}년 {month}월
+            </h2>
+            <button className="btn1" onClick={plusMonth}>▶</button>
+          </div>
+          <button className="btn2" onClick={goToToday}>오늘</button>
         </div>
 
         {/* 요일 헤더 */}

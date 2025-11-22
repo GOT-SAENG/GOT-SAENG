@@ -1,11 +1,17 @@
+.scheduler-page {
+  background-color: #134a2f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 .year-month-box {
   display: flex;
+  background-color: white;
   justify-content: space-between;
   align-items: center;
   height: 80px;
   border: 1px solid #ddd;
-  border-radius: 20px;
-  margin-bottom: 10px;
+  border-radius: 15px;
+  margin: 10px 0;
   padding: 0 30px;
 }
 
@@ -21,20 +27,53 @@
   text-align: center;
   margin-bottom: 6px;
   gap: 6px;
+  font-size: 20px;
 }
 
 .week-day {
-  border: 1px solid #ddd;
+  background-color: white;
   border-radius: 20px;
-  /* padding: 6px; */
   font-weight: 600;
 }
 
 .calendar-grid {
+  /* position: relative; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
   gap: 6px;
   text-align: center;
-  height: calc(100vh - 100px);
+  min-height: 100vh;
+  padding-bottom: 50px;
 }
+
+.btn1 {
+  border: none;
+  background-color: #134a2f;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.btn2 {
+  width: 70px;
+  height: 40px;
+  border: none;
+  background-color: #134a2f;
+  color: white;
+  border-radius: 10px;
+}
+
+.calender-icon:hover {
+  animation: wiggle 0.4s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(8deg); }
+  50% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
