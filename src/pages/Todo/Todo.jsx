@@ -4,7 +4,7 @@ import TodoList from "../../components/Todo/TodoList";
 import AIPriority from "../../components/Todo/AIPriority";
 import TodoModal from "../../components/Todo/TodoModal";
 import "./Todo.style.css";
-import HistoryHeader from "../../components/History/HistoryHeader";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -142,7 +142,6 @@ const Todo = () => {
 
   return (
     <div className="todo-container">
-      <HistoryHeader />
       <div className="todo-page">
         <div className="todo-content">
           <TodoHeader onAddTodo={handleAddTodo} />
@@ -152,7 +151,7 @@ const Todo = () => {
             onEdit={handleEditTodo} // 수정하기
             onDelete={handleDeleteTodo} // 삭제하기
           />
-          {showAIPriority && <AIPriority todos={todos} />}
+          {showAIPriority && <AIPriority todos={todos || []} />}
         </div>
 
         {/* AI추천받기버튼 */}

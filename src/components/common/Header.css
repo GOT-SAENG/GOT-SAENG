@@ -1,4 +1,4 @@
-.history-header {
+.header {
     padding: 1.5rem 0;
     background-color: #1A6B44;
     border-bottom: none;
@@ -9,6 +9,12 @@
     font-size: 1.5rem;
     font-weight: 600;
     color: #fff;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .header-title:hover {
+    opacity: 0.8;
   }
 
 

@@ -1,8 +1,8 @@
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./HistoryHeader.css";
+import "./Header.css";
 
-const HistoryHeader = () => {
+const Header = () => {
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
@@ -15,15 +15,18 @@ const HistoryHeader = () => {
   };
 
   return (
-    <div className="history-header">
+    <div className="header">
       <Container>
         <Row className="align-items-center justify-content-between">
-          {/* 좌측: 타이틀 */}
           <Col xs="auto">
-            <h2 className="header-title">GOTSAENG</h2>
+            <h2
+              className="header-title"
+              onClick={() => handleNavigation("/todo")}
+            >
+              GOTSAENG
+            </h2>
           </Col>
 
-          {/* 우측: 사용자 프로필 드롭다운 */}
           <Col xs="auto">
             <Dropdown align="end">
               <Dropdown.Toggle
@@ -58,4 +61,4 @@ const HistoryHeader = () => {
   );
 };
 
-export default HistoryHeader;
+export default Header;
