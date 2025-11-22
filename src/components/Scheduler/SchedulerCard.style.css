@@ -1,39 +1,47 @@
-
 /* 공통 카드 스타일 */
 .day-box {
-  border: 1px solid #ddd;
   border-radius: 15px;
   padding: 6px;
   position: relative;
-  background: #fff;
+  background-color: #fff;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  cursor: pointer;
+  padding-top: 70px;
+  flex-direction: column;
+  min-width: 180px;
+  min-height: 205px;
 }
 
 /* 모든 날짜 숫자 기본 스타일 (정렬 안정) */
 .day-number {
-  width: 26px;
-  height: 26px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  font-size: 14px;
-  /* font-weight: 600; */
+  font-size: 20px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 10px;
+  right: 10px;
   transition: 0.15s ease-in-out;
 }
 
 .next-month-label {
-  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-size: 20px;
+  height: 50px;
   /* font-weight: 600; */
   position: absolute;
-  color: #134A2F;
-  top: 6px;
-  right: 8px;
+  color: #134a2f;
+  top: 10px;
+  right: 15px;
+  transition: 0.15s ease-in-out;
 }
 
 /* 현재 달 */
@@ -44,7 +52,7 @@
 /* 이전/다음 달 */
 .day-box.prev .day-number,
 .day-box.next .day-number {
-  color: #134A2F;
+  color: #134a2f;
 }
 
 /* 오늘 날짜만 강조 스타일 */
@@ -55,5 +63,111 @@
 
 .day-box:nth-child(7n + 1),
 .day-box:nth-child(7n) {
-  background-color: #527E66; /* 부드러운 빨간 계열 */
+  background-color: #527e66;
+}
+
+.day-box.prev,
+.day-box.next {
+  background-color: gray;
+}
+
+/* 파일 맨 아래에 위치
+.day-box:hover {
+  background-color: aliceblue !important;
+} */
+
+.schedule-area {
+  width: 100%;
+}
+
+.schedule-list {
+  list-style: none;
+  padding: 0;
+  /* margin: 5px 0 0 0; */
+  width: 100%;
+}
+
+.schedule-item {
+  font-size: 14px;
+  color: #fff;
+  /* background-color: #1d8348; */
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 중요도 별 배경색 */
+.importance-4 {
+  background-color: #e74c3c; /* 빨강 */
+}
+
+.importance-3 {
+  background-color: #f39c12; /* 오렌지 */
+}
+
+.importance-2 {
+  background-color: #27ae60; /* 초록 */
+}
+
+/* 중요도 값 없는 기본 */
+.importance-1,
+.importance-undefined {
+  background-color: #7f8c8d; /* 회색 */
+}
+
+.schedule-more {
+  font-size: 14px;
+  /* font-weight: 600; */
+  /* color: white; */
+  text-align: left;
+  padding-left: 5px;
+}
+
+.schedule-more.weekday {
+  color: black;
+}
+
+.schedule-more.weekend {
+  color: white;
+}
+
+.schedule-check {
+  margin-right: 4px;
+  color: white; /* 초록색 체크 */
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.fire-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 30px;
+}
+
+.day-box:hover {
+  .fire-icon {
+    animation: wiggle 0.4s ease-in-out infinite;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
