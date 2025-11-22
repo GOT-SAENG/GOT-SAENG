@@ -58,12 +58,12 @@
   font-size: 0.9rem;
 }
 
-.form-group input:focus {
+.p input:focus {
   border-bottom-color: #1a6b44;
 }
 
 /* 에러 텍스트 */
-.error-text {
+.error-txt {
   font-size: 0.8rem;
   color: #e53e3e;
   margin-top: 4px;
