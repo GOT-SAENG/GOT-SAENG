@@ -90,7 +90,7 @@ const Register = () => {
           {/* 이메일 입력 */}
           <div className="form-group">
             <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
-            {formData.email && !formData.email.includes("@") && <span className="error-text">이메일 형식을 맞춰주세요.</span>}
+            {formData.email && !formData.email.includes("@") && <span className="error-txt">이메일 형식을 맞춰주세요.</span>}
           </div>
 
           {/* 비밀번호 입력 */}
@@ -111,7 +111,7 @@ const Register = () => {
                 {showPasswordConfirm ? <FontAwesomeIcon icon={faLockOpen} /> : <FontAwesomeIcon icon={faLock} />}
               </button>
             </div>
-            {formData.passwordConfirm && formData.password !== formData.passwordConfirm && <span className="error-text">비밀번호가 다릅니다.</span>}
+            {formData.passwordConfirm && formData.password !== formData.passwordConfirm && <span className="error-txt">비밀번호가 다릅니다.</span>}
           </div>
 
           {/* 회원가입 버튼 */}
