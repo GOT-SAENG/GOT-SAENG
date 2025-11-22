@@ -5,11 +5,14 @@
       "year": 2025,
       "month": 1,
       "items": [
-        { "id": 1, "text": "한강 조깅", "completed": true },
-        { "id": 2, "text": "리액트 공부하기", "completed": true },
-        { "id": 3, "text": "독서 3권", "completed": false },
-        { "id": 4, "text": "요가 수업", "completed": true },
-        { "id": 5, "text": "프로젝트 완성", "completed": true }
+        "한강 조깅",
+        "리액트 공부하기",
+        "독서 3권",
+        "요가 수업",
+        "프로젝트 완성",
+        "블로그 작성",
+        "영어 회화 학습",
+        "알고리즘 문제 풀이"
       ]
     },
     {
@@ -17,9 +20,11 @@
       "year": 2025,
       "month": 2,
       "items": [
-        { "id": 1, "text": "프로젝트 완성", "completed": true },
-        { "id": 2, "text": "운동 20일 달성", "completed": true },
-        { "id": 3, "text": "포트폴리오 정리", "completed": false }
+        "프로젝트 완성",
+        "운동 20일 달성",
+        "포트폴리오 정리",
+        "자격증 시험 준비",
+        "독서 5권 완료"
       ]
     },
     {
@@ -27,10 +32,13 @@
       "year": 2025,
       "month": 3,
       "items": [
-        { "id": 1, "text": "영어 회화", "completed": true },
-        { "id": 2, "text": "알고리즘 풀기", "completed": false },
-        { "id": 3, "text": "요가 시작", "completed": true },
-        { "id": 4, "text": "새 언어 배우기", "completed": false }
+        "영어 회화",
+        "알고리즘 풀기",
+        "요가 시작",
+        "새 언어 배우기",
+        "포트폴리오 업데이트",
+        "네트워킹 이벤트",
+        "기술 블로그 시작"
       ]
     },
     {
@@ -38,9 +46,11 @@
       "year": 2025,
       "month": 4,
       "items": [
-        { "id": 1, "text": "새 취미 찾기", "completed": true },
-        { "id": 2, "text": "여행 계획", "completed": true },
-        { "id": 3, "text": "등산 5회", "completed": false }
+        "새 취미 찾기",
+        "여행 계획",
+        "등산 5회",
+        "사진 촬영 배우기",
+        "요리 수업"
       ]
     },
     {
@@ -48,10 +58,12 @@
       "year": 2025,
       "month": 5,
       "items": [
-        { "id": 1, "text": "사이드 프로젝트", "completed": true },
-        { "id": 2, "text": "헬스 등록", "completed": true },
-        { "id": 3, "text": "블로그 작성", "completed": false },
-        { "id": 4, "text": "프론트엔드 스터디", "completed": true }
+        "사이드 프로젝트",
+        "헬스 등록",
+        "블로그 작성",
+        "프론트엔드 스터디",
+        "리팩토링 완료",
+        "코드 리뷰"
       ]
     },
     {
@@ -59,10 +71,12 @@
       "year": 2025,
       "month": 6,
       "items": [
-        { "id": 1, "text": "자격증 공부", "completed": true },
-        { "id": 2, "text": "독서 모임", "completed": true },
-        { "id": 3, "text": "컨퍼런스 참석", "completed": true },
-        { "id": 4, "text": "오픈소스 기여", "completed": false }
+        "자격증 공부",
+        "독서 모임",
+        "컨퍼런스 참석",
+        "오픈소스 기여",
+        "멘토링 시작",
+        "새 프레임워크 학습"
       ]
     },
     {
@@ -70,9 +84,11 @@
       "year": 2025,
       "month": 7,
       "items": [
-        { "id": 1, "text": "여름 휴가", "completed": true },
-        { "id": 2, "text": "자바스크립트 스터디", "completed": true },
-        { "id": 3, "text": "수영 강습", "completed": false }
+        "등산 3회",
+        "코딩 테스트 준비",
+        "알고리즘 스터디",
+        "프로젝트 배포",
+        "성능 최적화"
       ]
     },
     {
@@ -80,10 +96,12 @@
       "year": 2025,
       "month": 8,
       "items": [
-        { "id": 1, "text": "코딩 테스트 5문제 풀기", "completed": true },
-        { "id": 2, "text": "부산 여행", "completed": false },
-        { "id": 3, "text": "맛집 투어", "completed": true },
-        { "id": 4, "text": "가계부 작성", "completed": true }
+        "포트폴리오 정리",
+        "운동 루틴 완성",
+        "새 기술 스택 학습",
+        "팀 프로젝트 시작",
+        "디자인 패턴 공부",
+        "테스트 코드 작성"
       ]
     },
     {
@@ -91,9 +109,11 @@
       "year": 2025,
       "month": 9,
       "items": [
-        { "id": 1, "text": "추석 선물 구매", "completed": true },
-        { "id": 2, "text": "Next.js 프로젝트", "completed": true },
-        { "id": 3, "text": "필라테스 등록", "completed": false }
+        "새로운 언어 학습",
+        "습관 만들기",
+        "일일 코딩",
+        "책 집필 시작",
+        "강의 수강"
       ]
     },
     {
@@ -101,9 +121,12 @@
       "year": 2025,
       "month": 10,
       "items": [
-        { "id": 1, "text": "가을 등산", "completed": true },
-        { "id": 2, "text": "채용 공고 확인", "completed": false },
-        { "id": 3, "text": "포트폴리오 업데이트", "completed": true }
+        "프로젝트 배포",
+        "기술 블로그",
+        "컨퍼런스 발표",
+        "이력서 업데이트",
+        "포트폴리오 개선",
+        "CI/CD 구축"
       ]
     },
     {
@@ -111,142 +134,140 @@
       "year": 2025,
       "month": 11,
       "items": [
-        { "id": 1, "text": "코트 구매", "completed": true },
-        { "id": 2, "text": "겨울 옷장 정리", "completed": false },
-        { "id": 3, "text": "송년회 계획", "completed": true }
+        "이력서 업데이트",
+        "네트워킹",
+        "면접 준비",
+        "자격증 취득",
+        "스터디 리딩",
+        "사이드 프로젝트 완성"
       ]
     },
     {
-      "id": "13",
-      "year": 2024,
-      "month": 7,
-      "items": [
-        { "id": 1, "text": "여름휴가 계획", "completed": true },
-        { "id": 2, "text": "자바스크립트 딥다이브 스터디", "completed": false },
-        { "id": 3, "text": "수영 배우기", "completed": true }
-      ]
-    },
-    {
-      "id": "14",
-      "year": 2024,
-      "month": 8,
-      "items": [
-        { "id": 1, "text": "코딩 테스트 10문제 풀기", "completed": true },
-        { "id": 2, "text": "제주도 여행", "completed": true },
-        { "id": 3, "text": "맛집 탐방", "completed": true },
-        { "id": 4, "text": "가계부 정리", "completed": true }
-      ]
-    },
-    {
-      "id": "15",
-      "year": 2024,
-      "month": 9,
-      "items": [
-        { "id": 1, "text": "추석 선물 준비", "completed": true },
-        { "id": 2, "text": "Vue.js 프로젝트 시작", "completed": true },
-        { "id": 3, "text": "헬스장 PT 등록", "completed": true }
-      ]
-    },
-    {
-      "id": "16",
-      "year": 2024,
-      "month": 10,
-      "items": [
-        { "id": 1, "text": "단풍 구경", "completed": true },
-        { "id": 2, "text": "면접 준비", "completed": true },
-        { "id": 3, "text": "이력서 업데이트", "completed": true }
-      ]
-    },
-    {
-      "id": "17",
-      "year": 2024,
-      "month": 11,
-      "items": [
-        { "id": 1, "text": "빼빼로데이 선물 준비", "completed": true },
-        { "id": 2, "text": "겨울 옷 정리", "completed": true },
-        { "id": 3, "text": "연말 파티 계획", "completed": false }
-      ]
-    },
-    {
-      "id": "18",
-      "year": 2024,
+      "id": "12",
+      "year": 2025,
       "month": 12,
       "items": [
-        { "id": 1, "text": "크리스마스 케이크 예약", "completed": true },
-        { "id": 2, "text": "연말정산", "completed": false },
-        { "id": 3, "text": "새해 계획 세우기", "completed": true }
+        "연말 정리",
+        "내년 계획",
+        "목표 설정",
+        "회고록 작성",
+        "감사 일기",
+        "새해 다짐",
+        "건강 검진"
+      ]
+    }
+  ],
+  "chartData": [
+    {
+      "id": "1",
+      "period": "daily",
+      "data": [
+        {
+          "name": "월",
+          "value": 80
+        },
+        {
+          "name": "화",
+          "value": 65
+        },
+        {
+          "name": "수",
+          "value": 90
+        },
+        {
+          "name": "목",
+          "value": 75
+        },
+        {
+          "name": "금",
+          "value": 85
+        },
+        {
+          "name": "토",
+          "value": 70
+        },
+        {
+          "name": "일",
+          "value": 95
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "period": "weekly",
+      "data": [
+        {
+          "name": "1주",
+          "value": 75
+        },
+        {
+          "name": "2주",
+          "value": 82
+        },
+        {
+          "name": "3주",
+          "value": 68
+        },
+        {
+          "name": "4주",
+          "value": 90
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "period": "monthly",
+      "data": [
+        {
+          "name": "1월",
+          "value": 70
+        },
+        {
+          "name": "2월",
+          "value": 80
+        },
+        {
+          "name": "3월",
+          "value": 85
+        },
+        {
+          "name": "4월",
+          "value": 75
+        },
+        {
+          "name": "5월",
+          "value": 90
+        },
+        {
+          "name": "6월",
+          "value": 88
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "period": "yearly",
+      "data": [
+        {
+          "name": "2022",
+          "value": 70
+        },
+        {
+          "name": "2023",
+          "value": 78
+        },
+        {
+          "name": "2024",
+          "value": 85
+        },
+        {
+          "name": "2025",
+          "value": 92
+        }
       ]
     }
   ],
   "todos": [
-    {
-      "id": "1",
-      "title": "리액트 기초 공부",
-      "description": "컴포넌트 라이프사이클 및 Hooks 개념 정리하기",
-      "importance": 3,
-      "estimatedTime": 120,
-      "dateType": "single",
-      "startDate": "2024-05-20",
-      "dueDate": null,
-      "category": "공부",
-      "isAlarm": true,
-      "createdAt": "2024-05-19T09:00:00.000Z",
-      "updatedAt": "2024-05-19T09:00:00.000Z",
-      "startTime": "10:00",
-      "endTime": "12:00",
-      "status": "completed"
-    },
-    {
-      "id": "2",
-      "title": "프로젝트 기획서 작성",
-      "description": "기능 명세서 및 UI 프로토타입 초안 작성",
-      "importance": 4,
-      "estimatedTime": 300,
-      "dateType": "range",
-      "startDate": "2024-05-21",
-      "dueDate": "2024-05-23",
-      "category": "업무",
-      "isAlarm": false,
-      "createdAt": "2024-05-20T14:30:00.000Z",
-      "updatedAt": "2024-05-21T10:00:00.000Z",
-      "startTime": null,
-      "endTime": null,
-      "status": "progress"
-    },
-    {
-      "id": "3",
-      "title": "한강 러닝 5km",
-      "description": "체력 증진을 위한 가벼운 조깅",
-      "importance": 2,
-      "estimatedTime": 45,
-      "dateType": "single",
-      "startDate": "2024-05-24",
-      "dueDate": null,
-      "category": "운동",
-      "isAlarm": true,
-      "createdAt": "2024-05-22T07:00:00.000Z",
-      "updatedAt": "2024-05-22T07:00:00.000Z",
-      "startTime": "19:00",
-      "endTime": "20:00",
-      "status": "pending"
-    },
-    {
-      "id": "4",
-      "title": "주간 팀 회의",
-      "description": "지난주 이슈 공유 및 이번주 스프린트 계획",
-      "importance": 3,
-      "estimatedTime": 60,
-      "dateType": "single",
-      "startDate": "2024-05-27",
-      "dueDate": null,
-      "category": "업무",
-      "isAlarm": true,
-      "createdAt": "2024-05-23T09:00:00.000Z",
-      "updatedAt": "2024-05-23T09:00:00.000Z",
-      "startTime": "10:00",
-      "endTime": "11:00",
-      "status": "pending"
-    },
     {
       "id": "5",
       "title": "대형마트 장보기",
@@ -425,6 +446,22 @@
       "isAlarm": false,
       "createdAt": "2025-11-22T06:15:38.353Z",
       "updatedAt": "2025-11-22T06:21:15.641Z",
+      "startTime": null,
+      "endTime": null,
+      "status": "pending"
+    },
+    {
+      "id": "7838",
+      "title": "친구랑 놀기",
+      "description": "",
+      "importance": 2,
+      "dateType": "single",
+      "startDate": "2025-11-22",
+      "dueDate": null,
+      "category": "기타",
+      "isAlarm": false,
+      "createdAt": "2025-11-22T09:08:17.814Z",
+      "updatedAt": "2025-11-22T09:08:17.814Z",
       "startTime": null,
       "endTime": null,
       "status": "pending"
