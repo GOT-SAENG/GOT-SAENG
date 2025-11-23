@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
-import "./MyPage.css";
+import "./Mypage.css";
 
 const Mypage = () => {
   const navigate = useNavigate();
