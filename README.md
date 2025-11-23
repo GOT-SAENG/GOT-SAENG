@@ -147,6 +147,11 @@
 
 ---
 
+### 👤 마이페이지
+![마이페이지](https://github.com/user-attachments/assets/6f505707-5426-4f6a-b627-4e84be06ae35)
+- 프로필 사진과 닉네임 비밀번호를 변경할 수 있습니다. 
+---
+
 ### ✅ 투두 리스트
 
 ![투두리스트](https://github.com/user-attachments/assets/3017bafd-40f8-4bd8-a22e-8e7258c49e10)
