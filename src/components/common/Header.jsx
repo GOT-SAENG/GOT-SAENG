@@ -54,6 +54,7 @@ const Header = () => {
                   <Dropdown.Item onClick={() => handleNavigation("/mypage")}>마이페이지</Dropdown.Item>
                   <Dropdown.Item onClick={() => handleNavigation("/todo")}>투두리스트</Dropdown.Item>
                   <Dropdown.Item onClick={() => handleNavigation("/scheduler")}>스케줄러</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleNavigation("/history")}>히스토리</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={handleLogout} className="logout-item">
                     로그아웃
