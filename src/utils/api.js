@@ -16,6 +16,9 @@ export const getTodoPriorityByAI = async (todos) => {
 2) 우선순위 레벨(level: high, medium, low)
 3) 짧은 이유(reason)
 
+⚠️ 중요: status가 "completed"인 완료된 항목은 제외하고 분석해줘.
+완료되지 않은 항목(status가 "pending" 또는 "progress")만 우선순위를 매겨줘.
+
 JSON 배열 형태만 출력해줘.
 ❗ 절대 코드블록(\`\`\`)을 사용하지 말고, JSON만 반환해.
 

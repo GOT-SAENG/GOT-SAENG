@@ -1,7 +1,11 @@
 import "./TodoItem.style.css";
 import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const TodoItem = ({ item, onEdit, onDelete, onView }) => {
+const TodoItem = ({ item, onEdit, onDelete, onView, onToggleComplete }) => {
+  const isCompleted = item.status === "completed";
+
   // 상세내용 미리보기 (최대 50자)
   const getDescriptionPreview = (description) => {
     if (!description) return null;
@@ -12,17 +16,42 @@ const TodoItem = ({ item, onEdit, onDelete, onView }) => {
   };
 
   const handleItemClick = (e) => {
-    // 버튼 클릭 시에는 상세보기 모달이 열리지 않도록
-    if (e.target.closest(".todo-actions")) {
+    if (
+      e.target.closest(".todo-actions") ||
+      e.target.closest(".todo-checkbox")
+    ) {
       return;
     }
-    onView(item);
+    if (onView) {
+      onView(item);
+    }
+  };
+
+  const handleCheckboxChange = (e) => {
+    e.stopPropagation();
+    if (onToggleComplete) {
+      onToggleComplete(item);
+    }
   };
 
   return (
-    <div className="todo-item" onClick={handleItemClick}>
-      {/* 썸네일 어떤걸로 할까요???????????????????????*/}
-      {/* <div className="todo-thumb"></div> */}
+    <div
+      className={`todo-item ${isCompleted ? "todo-item-completed" : ""}`}
+      onClick={handleItemClick}
+    >
+      {/* 체크박스 */}
+      <div className="todo-checkbox" onClick={(e) => e.stopPropagation()}>
+        <input
+          type="checkbox"
+          checked={isCompleted}
+          onChange={handleCheckboxChange}
+          className="todo-checkbox-input"
+          aria-label={isCompleted ? "완료 취소" : "완료하기"}
+        />
+        {isCompleted && (
+          <FontAwesomeIcon icon={faCheck} className="todo-checkbox-icon" />
+        )}
+      </div>
 
       {/* 가운데(왼쪽?) 텍스트 */}
       <div className="todo-text">
