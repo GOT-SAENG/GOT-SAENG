@@ -2,9 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import { getTodoPriorityByAI } from "../../utils/api";
 import "./AIPriority.style.css";
 
-// 투두를 월별로 필터링하는 함수
+// 투두를 월별로 필터링하는 함수 (완료된 투두 제외)
 const getTodosByMonth = (todos, year, month) => {
   return todos.filter((todo) => {
+    // 완료된 투두는 제외
+    if (todo.status === "completed") return false;
+
     if (!todo.startDate) return false;
 
     const startDate = new Date(todo.startDate);
@@ -70,6 +73,9 @@ const groupByDate = (todos) => {
   const groups = {};
 
   todos.forEach((todo) => {
+    // 완료된 투두는 제외
+    if (todo.status === "completed") return;
+
     if (!todo.startDate) return;
 
     const startDate = new Date(todo.startDate);
@@ -116,6 +122,7 @@ const getDateHash = (todos) => {
         description: t.description || "",
         estimatedTime: t.estimatedTime || 0,
         category: t.category || "",
+        status: t.status || "pending", // 상태 포함하여 캐시 무효화 개선
       });
     });
 

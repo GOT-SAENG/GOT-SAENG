@@ -2,7 +2,7 @@ import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"; // Context 추가
 import "./Header.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo2.svg";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -29,7 +29,11 @@ const Header = () => {
       <Container>
         <Row className="align-items-center justify-content-between">
           <Col xs="auto">
-            <div className="header-title" onClick={() => handleNavigation("/todo")} style={{ cursor: "pointer" }}>
+            <div
+              className="header-title"
+              onClick={() => handleNavigation("/todo")}
+              style={{ cursor: "pointer" }}
+            >
               <img src={logo} alt="GOTSAENG logo" className="logo-image" />
             </div>
           </Col>
@@ -39,13 +43,27 @@ const Header = () => {
             {isAuthenticated() ? (
               // 로그인한 경우: 드롭다운 메뉴
               <Dropdown align="end">
-                <Dropdown.Toggle variant="link" id="user-dropdown" className="user-profile-dropdown">
+                <Dropdown.Toggle
+                  variant="link"
+                  id="user-dropdown"
+                  className="user-profile-dropdown"
+                >
                   <div className="user-profile">
                     {/* 실제 사용자 닉네임 표시 */}
                     <span className="user-name">{user.nickname}님</span>
                     <div className="user-avatar">
                       {/* 프로필 이미지가 있으면 표시, 없으면 첫 글자 */}
-                      {localStorage.getItem(`profile_${user.email}`) ? <img src={localStorage.getItem(`profile_${user.email}`)} alt="프로필" className="avatar-image" /> : <span className="avatar-initial">{user.nickname.charAt(0)}</span>}
+                      {localStorage.getItem(`profile_${user.email}`) ? (
+                        <img
+                          src={localStorage.getItem(`profile_${user.email}`)}
+                          alt="프로필"
+                          className="avatar-image"
+                        />
+                      ) : (
+                        <span className="avatar-initial">
+                          {user.nickname.charAt(0)}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Dropdown.Toggle>

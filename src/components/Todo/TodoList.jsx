@@ -1,7 +1,7 @@
 import TodoItem from "./TodoItem";
 import "./TodoList.style.css";
 
-const TodoList = ({ todos = [], onEdit, onDelete }) => {
+const TodoList = ({ todos = [], onEdit, onDelete, onToggleComplete }) => {
   const hasData = todos.length > 0;
 
   return (
@@ -13,6 +13,7 @@ const TodoList = ({ todos = [], onEdit, onDelete }) => {
             item={item}
             onEdit={onEdit}
             onDelete={onDelete}
+            onToggleComplete={onToggleComplete}
           />
         ))
       ) : (
